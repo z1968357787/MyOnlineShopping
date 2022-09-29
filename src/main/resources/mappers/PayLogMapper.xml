@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.PayLogMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.PayLog">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <id column="contact_id" jdbcType="INTEGER" property="contactId" />
+    <id column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="subtotal" jdbcType="DECIMAL" property="subtotal" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact_man" jdbcType="VARCHAR" property="contactMan" />
+    <result column="pay_mode" jdbcType="VARCHAR" property="payMode" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="refund_reason" jdbcType="VARCHAR" property="refundReason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, product_id, contact_id, pay_date, product_name, quantity, subtotal, phone, 
+    address, contact_man, pay_mode, state, price, refund_reason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xxxx.crm.vo.PayLogKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay_log
+    where user_id = #{userId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+      and contact_id = #{contactId,jdbcType=INTEGER}
+      and pay_date = #{payDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xxxx.crm.vo.PayLogKey">
+    delete from t_pay_log
+    where user_id = #{userId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+      and contact_id = #{contactId,jdbcType=INTEGER}
+      and pay_date = #{payDate,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.PayLog">
+    insert into t_pay_log (user_id, product_id, contact_id, 
+      pay_date, product_name, quantity, 
+      subtotal, phone, address, 
+      contact_man, pay_mode, state, 
+      price, refund_reason)
+    values (#{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{contactId,jdbcType=INTEGER}, 
+      #{payDate,jdbcType=TIMESTAMP}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{subtotal,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{contactMan,jdbcType=VARCHAR}, #{payMode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{refundReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.PayLog">
+    insert into t_pay_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="contactId != null">
+        contact_id,
+      </if>
+      <if test="payDate != null">
+        pay_date,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="subtotal != null">
+        subtotal,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="contactMan != null">
+        contact_man,
+      </if>
+      <if test="payMode != null">
+        pay_mode,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="refundReason != null">
+        refund_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMan != null">
+        #{contactMan,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null">
+        #{payMode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="refundReason != null">
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.PayLog">
+    update t_pay_log
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMan != null">
+        contact_man = #{contactMan,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null">
+        pay_mode = #{payMode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="refundReason != null">
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+      and contact_id = #{contactId,jdbcType=INTEGER}
+      and pay_date = #{payDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.PayLog">
+    update t_pay_log
+    set product_name = #{productName,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_man = #{contactMan,jdbcType=VARCHAR},
+      pay_mode = #{payMode,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      refund_reason = #{refundReason,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+      and contact_id = #{contactId,jdbcType=INTEGER}
+      and pay_date = #{payDate,jdbcType=TIMESTAMP}
+  </update>
+
+
+  <insert id="insertBatch" parameterType="list">
+    insert into t_pay_log (user_id,product_id,contact_id,pay_date,product_name,price,quantity,subtotal,phone,address,contact_man,pay_mode)
+    VALUES
+    <foreach collection="list" item="com.xxxx.crm.vo.PayLog" separator=",">
+      (#{com.xxxx.crm.vo.PayLog.userId},
+      #{com.xxxx.crm.vo.PayLog.productId},
+      #{com.xxxx.crm.vo.PayLog.contactId},
+      #{com.xxxx.crm.vo.PayLog.payDate},
+      #{com.xxxx.crm.vo.PayLog.productName},
+      #{com.xxxx.crm.vo.PayLog.price},
+      #{com.xxxx.crm.vo.PayLog.quantity},
+      #{com.xxxx.crm.vo.PayLog.subtotal},
+      #{com.xxxx.crm.vo.PayLog.phone},
+      #{com.xxxx.crm.vo.PayLog.address},
+      #{com.xxxx.crm.vo.PayLog.contactMan},
+      #{com.xxxx.crm.vo.PayLog.payMode})
+    </foreach>
+  </insert>
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.PayLogQuery" resultType="com.xxxx.crm.vo.PayLog">
+    select <include refid="Base_Column_List" /> from t_pay_log
+    <where>
+      <if test="userId!=null and userId !=''">
+         user_id=#{userId}
+      </if>
+      <if test="productName!=null and productName !=''">
+        and product_name like concat ('%',#{productName},'%')
+      </if>
+      <if test="payDate!=null and payDate !=''">
+        and pay_date like concat ('%',#{payDate},'%')
+      </if>
+      <if test="phone!=null and phone !=''">
+        and phone like concat ('%',#{phone},'%')
+      </if>
+      <if test="address!=null and address !=''">
+        and address like concat ('%',#{address},'%')
+      </if>
+      <if test="contactMan!=null and contactMan !=''">
+        and contact_man like concat ('%',#{contactMan},'%')
+      </if>
+      <if test="payMode!=null and payMode !=''">
+        and pay_mode like concat ('%',#{payMode},'%')
+      </if>
+      <if test="state!=null and state !=''">
+        and state like concat ('%',#{state},'%')
+      </if>
+    </where>
+  </select>
+</mapper>

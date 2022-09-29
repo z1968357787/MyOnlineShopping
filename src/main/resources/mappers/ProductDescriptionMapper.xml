@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.ProductDescriptionMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.ProductDescription">
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_description" jdbcType="VARCHAR" property="productDescription" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="classification" jdbcType="VARCHAR" property="classification" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="list_time" jdbcType="TIMESTAMP" property="listTime" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    product_id, product_name, product_description, price, classification, supplier, list_time, 
+    stock
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_description
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product_description
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.ProductDescription">
+    insert into t_product_description (product_id, product_name, product_description, 
+      price, classification, supplier, 
+      list_time, stock)
+    values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productDescription,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{classification,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
+      #{listTime,jdbcType=TIMESTAMP}, #{stock,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.ProductDescription">
+    insert into t_product_description
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productDescription != null">
+        product_description,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="classification != null and classification !=''">
+        classification,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="listTime != null">
+        list_time,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescription != null">
+        #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="classification != null">
+        #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="listTime != null">
+        #{listTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.ProductDescription">
+    update t_product_description
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescription != null">
+        product_description = #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="classification != null and classification!=''">
+        classification = #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="listTime != null">
+        list_time = #{listTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.ProductDescription">
+    update t_product_description
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_description = #{productDescription,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      classification = #{classification,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      list_time = #{listTime,jdbcType=TIMESTAMP},
+      stock = #{stock,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.ProductQuery" resultType="com.xxxx.crm.vo.ProductDescription">
+    select <include refid="Base_Column_List" /> from t_product_description
+    <where>
+       <if test="productName!=null and productName !=''">
+         and product_name like concat ('%',#{productName},'%')
+       </if>
+      <if test="productDescription!=null and productDescription !=''">
+        and product_description like concat ('%',#{productDescription},'%')
+      </if>
+      <if test="classification!=null and classification !=''">
+        and classification=#{classification}
+      </if>
+      <if test="supplier!=null and supplier !=''">
+        and supplier like concat ('%',#{supplier},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--这个不可用-->
+
+  <delete id="deleteBatch">
+    delete from t_product_description where product_id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <update id="updateBatch">
+    update t_product_description set classification='others' where product_id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </update>
+
+</mapper>

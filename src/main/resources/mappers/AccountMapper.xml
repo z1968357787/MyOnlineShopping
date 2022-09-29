@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.Account">
+    <id column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account_password" jdbcType="VARCHAR" property="accountPassword" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="card_holder" jdbcType="VARCHAR" property="cardHolder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    account_number, user_id, account_password, balance, card_holder
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_account
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_account
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.Account">
+    insert into t_account (account_number, user_id, account_password, 
+      balance, card_holder)
+    values (#{accountNumber,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{accountPassword,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{cardHolder,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Account">
+    insert into t_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountNumber != null">
+        account_number,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="accountPassword != null">
+        account_password,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="cardHolder != null">
+        card_holder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountNumber != null">
+        #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountPassword != null">
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="cardHolder != null">
+        #{cardHolder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.Account">
+    update t_account
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountPassword != null">
+        account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="cardHolder != null">
+        card_holder = #{cardHolder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.Account">
+    update t_account
+    set user_id = #{userId,jdbcType=INTEGER},
+      account_password = #{accountPassword,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      card_holder = #{cardHolder,jdbcType=VARCHAR}
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryUserByName" parameterType="String" resultType="com.xxxx.crm.vo.Account">
+    select
+    <include refid="Base_Column_List" />
+    from
+    t_account
+    where account_number=#{accountNumber}
+  </select>
+</mapper>

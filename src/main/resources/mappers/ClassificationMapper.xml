@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.crm.dao.ClassificationMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.Classification" >
+    <id column="classification" property="classification" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_classification
+    where classification = #{classification,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.Classification" >
+    insert into t_classification (classification)
+    values (#{classification,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Classification" >
+    insert into t_classification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classification != null" >
+        classification,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classification != null" >
+        #{classification,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="queryAllClassifications" resultType="java.util.Map">
+    select * from t_classification
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.model.ClassificationModel">
+    update t_classification set classification=#{newClassification,jdbcType=VARCHAR} where classification=#{oldClassification,jdbcType=VARCHAR}
+  </update>
+</mapper>

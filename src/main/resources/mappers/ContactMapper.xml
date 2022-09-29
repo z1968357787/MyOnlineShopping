@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.ContactMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.Contact">
+    <id column="contact_id" jdbcType="INTEGER" property="contactId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact_man" jdbcType="VARCHAR" property="contactMan" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    contact_id, user_id, phone, address, contact_man
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_contact
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.Contact">
+    insert into t_contact (contact_id, user_id, phone, 
+      address, contact_man)
+    values (#{contactId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{contactMan,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Contact">
+    insert into t_contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contactId != null">
+        contact_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="contactMan != null">
+        contact_man,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contactId != null">
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMan != null">
+        #{contactMan,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.Contact">
+    update t_contact
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMan != null">
+        contact_man = #{contactMan,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.Contact">
+    update t_contact
+    set user_id = #{userId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_man = #{contactMan,jdbcType=VARCHAR}
+    where contact_id = #{contactId,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.ContactQuery" resultType="com.xxxx.crm.vo.Contact">
+    select <include refid="Base_Column_List" /> from t_contact
+    <where>
+        user_id=#{userId}
+      <if test="phone!=null and phone !=''">
+        and phone like concat ('%',#{phone},'%')
+      </if>
+      <if test="address!=null and address !=''">
+        and address like concat ('%',#{address},'%')
+      </if>
+      <if test="contactMan!=null and contactMan !=''">
+        and contact_man like concat ('%',#{contactMan},'%')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteBatch">
+    delete from t_contact where contact_id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+</mapper>

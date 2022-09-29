@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.TransferLogMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.TransferLog">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="transfer_mode" jdbcType="VARCHAR" property="transferMode" />
+    <result column="transfer_date" jdbcType="TIMESTAMP" property="transferDate" />
+    <result column="card_holder" jdbcType="VARCHAR" property="cardHolder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, account_number, money, transfer_mode, transfer_date, card_holder
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xxxx.crm.vo.TransferLogKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_transfer_log
+    where user_id = #{userId,jdbcType=INTEGER}
+      and account_number = #{accountNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xxxx.crm.vo.TransferLogKey">
+    delete from t_transfer_log
+    where user_id = #{userId,jdbcType=INTEGER}
+      and account_number = #{accountNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.TransferLog">
+    insert into t_transfer_log (user_id, account_number, money, 
+      transfer_mode, transfer_date, card_holder
+      )
+    values (#{userId,jdbcType=INTEGER}, #{accountNumber,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{transferMode,jdbcType=VARCHAR}, #{transferDate,jdbcType=TIMESTAMP}, #{cardHolder,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.TransferLog">
+    insert into t_transfer_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="accountNumber != null">
+        account_number,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="transferMode != null">
+        transfer_mode,
+      </if>
+      <if test="transferDate != null">
+        transfer_date,
+      </if>
+      <if test="cardHolder != null">
+        card_holder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountNumber != null">
+        #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="transferMode != null">
+        #{transferMode,jdbcType=VARCHAR},
+      </if>
+      <if test="transferDate != null">
+        #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardHolder != null">
+        #{cardHolder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.TransferLog">
+    update t_transfer_log
+    <set>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="transferMode != null">
+        transfer_mode = #{transferMode,jdbcType=VARCHAR},
+      </if>
+      <if test="transferDate != null">
+        transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardHolder != null">
+        card_holder = #{cardHolder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+      and account_number = #{accountNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.TransferLog">
+    update t_transfer_log
+    set money = #{money,jdbcType=DECIMAL},
+      transfer_mode = #{transferMode,jdbcType=VARCHAR},
+      transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      card_holder = #{cardHolder,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+      and account_number = #{accountNumber,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.TransferLogQuery" resultType="com.xxxx.crm.vo.TransferLog">
+    select <include refid="Base_Column_List" /> from t_transfer_log
+    <where>
+      user_id=#{userId}
+      <if test="transferDate!=null and transferDate !=''">
+        and transfer_date like concat ('%',#{transferDate},'%')
+      </if>
+      <if test="transferMode!=null and transferMode !=''">
+        and transfer_mode like concat ('%',#{transferMode},'%')
+      </if>
+      <if test="cardHolder!=null and cardHolder !=''">
+        and card_holder like concat ('%',#{cardHolder},'%')
+      </if>
+    </where>
+  </select>
+</mapper>
