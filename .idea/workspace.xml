@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/PostSaleMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/ProductDescriptionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/ProductDescriptionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ContactService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ContactService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PostSale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PostSaleKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/PostSaleMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/payment/payment_process.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/payment/payment_process.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/main.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/main.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/productDescription/product_description.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/productDescription/product_description.ftl" afterDir="false" />
-    </list>
+    <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="Second commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,8 +170,16 @@
       <workItem from="1664588837123" duration="7825000" />
       <workItem from="1664638798426" duration="4720000" />
       <workItem from="1664676498488" duration="5485000" />
-      <workItem from="1664698818598" duration="1239000" />
+      <workItem from="1664698818598" duration="1547000" />
     </task>
+    <task id="LOCAL-00001" summary="Second commit">
+      <created>1664700332040</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664700332040</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +195,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second commit" />
+    <MESSAGE value="Second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
