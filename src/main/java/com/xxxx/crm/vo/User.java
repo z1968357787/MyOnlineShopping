@@ -15,8 +15,6 @@ public class User {
 
     private String phone;
 
-    private Integer isValid;
-
     private Date createDate;
 
     private Date updateDate;
@@ -69,14 +67,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
-    }
-
-    public Integer getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(Integer isValid) {
-        this.isValid = isValid;
     }
 
     public Date getCreateDate() {

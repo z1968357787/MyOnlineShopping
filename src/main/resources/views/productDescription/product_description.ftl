@@ -54,18 +54,12 @@
     </script>
 
 
-    <!--
+    <!--操作-->
     <script id="productDescriptionListBar" type="text/html">
-            <div style="width: 160px">
 
-                <input style="width: 50px; height: 38px; border: 2px white; float: left;" type="button" value="-" onclick="reductionOf(this)" />
-
-                <input style="text-align: center; width: 50px; height: 32px; float: left;" type="text" value="1" onblur="checkNumber(this)" />
-
-                <input style="width: 50px; height: 38px; border: 2px white;" type="button" value="+" onclick="add(this)" />
-
-            </div>
-    </script>操作-->
+        <!--<input type="number" name="count" lay-verify="required"  placeholder="购买数量" class="layui-input">-->
+        <a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">编辑</a>
+    </script>
 </form>
 
 <script type="text/javascript" src="${ctx}/js/productDescription/product_description.js"></script>

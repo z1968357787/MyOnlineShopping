@@ -14,7 +14,21 @@
                     <label class="layui-form-label">总支付金额</label>
                     <div class="layui-input-block">
                         <input type="text" class="layui-input" lay-verify="required"
-                               name="total" id="total"  value="${(total)!}元" readonly="readonly">
+                               name="sumTotal" id="sumTotal"  value="${(moneyModel.sumTotal)!}元" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row layui-col-xs12">
+                    <label class="layui-form-label">优惠后金额</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" lay-verify="required"
+                               name="discountTotal" id="discountTotal"  value="${(moneyModel.discountTotal)!}元" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row layui-col-xs12">
+                    <label class="layui-form-label">税后金额</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" lay-verify="required"
+                               name="taxTotal" id="taxTotal"  value="${(moneyModel.taxTotal)!}元" readonly="readonly">
                     </div>
                 </div>
             </div>

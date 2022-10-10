@@ -24,6 +24,11 @@ public class IndexController extends BaseController {
         return "index";
     }
 
+    @RequestMapping("register")
+    public String register(){
+        return "register";
+    }
+
     // 系统界⾯欢迎⻚
     @RequestMapping("welcome")
     public String welcome(){

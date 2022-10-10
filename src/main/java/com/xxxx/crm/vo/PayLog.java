@@ -1,7 +1,5 @@
 package com.xxxx.crm.vo;
 
-import java.math.BigDecimal;
-
 public class PayLog extends PayLogKey {
     private String productName;
 
@@ -22,6 +20,14 @@ public class PayLog extends PayLogKey {
     private Double price;
 
     private String refundReason;
+
+    private Double discountTotal;
+
+    private String discountDescription;
+
+    private Double taxTotal;
+
+    private String taxDescription;
 
     public String getProductName() {
         return productName;
@@ -45,6 +51,8 @@ public class PayLog extends PayLogKey {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
+        this.discountTotal=subtotal;
+        this.taxTotal=subtotal;
     }
 
     public String getPhone() {
@@ -101,5 +109,38 @@ public class PayLog extends PayLogKey {
 
     public void setRefundReason(String refundReason) {
         this.refundReason = refundReason == null ? null : refundReason.trim();
+    }
+
+    public Double getDiscountTotal() {
+        return discountTotal;
+    }
+
+    public void setDiscountTotal(Double discountTotal) {
+        this.discountTotal = discountTotal;
+        this.taxTotal=discountTotal;
+    }
+
+    public String getDiscountDescription() {
+        return discountDescription;
+    }
+
+    public void setDiscountDescription(String discountDescription) {
+        this.discountDescription = discountDescription == null ? null : discountDescription.trim();
+    }
+
+    public Double getTaxTotal() {
+        return taxTotal;
+    }
+
+    public void setTaxTotal(Double taxTotal) {
+        this.taxTotal = taxTotal;
+    }
+
+    public String getTaxDescription() {
+        return taxDescription;
+    }
+
+    public void setTaxDescription(String taxDescription) {
+        this.taxDescription = taxDescription == null ? null : taxDescription.trim();
     }
 }

@@ -16,10 +16,15 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="refund_reason" jdbcType="VARCHAR" property="refundReason" />
+    <result column="discount_total" jdbcType="DECIMAL" property="discountTotal" />
+    <result column="discount_description" jdbcType="VARCHAR" property="discountDescription" />
+    <result column="tax_total" jdbcType="DECIMAL" property="taxTotal" />
+    <result column="tax_description" jdbcType="VARCHAR" property="taxDescription" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, product_id, contact_id, pay_date, product_name, quantity, subtotal, phone, 
-    address, contact_man, pay_mode, state, price, refund_reason
+    address, contact_man, pay_mode, state, price, refund_reason, discount_total, discount_description, 
+    tax_total, tax_description
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.xxxx.crm.vo.PayLogKey" resultMap="BaseResultMap">
     select 
@@ -42,12 +47,16 @@
       pay_date, product_name, quantity, 
       subtotal, phone, address, 
       contact_man, pay_mode, state, 
-      price, refund_reason)
+      price, refund_reason, discount_total, 
+      discount_description, tax_total, tax_description
+      )
     values (#{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{contactId,jdbcType=INTEGER}, 
       #{payDate,jdbcType=TIMESTAMP}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{subtotal,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{contactMan,jdbcType=VARCHAR}, #{payMode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{refundReason,jdbcType=VARCHAR})
+      #{price,jdbcType=DECIMAL}, #{refundReason,jdbcType=VARCHAR}, #{discountTotal,jdbcType=DECIMAL}, 
+      #{discountDescription,jdbcType=VARCHAR}, #{taxTotal,jdbcType=DECIMAL}, #{taxDescription,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.PayLog">
     insert into t_pay_log
@@ -94,6 +103,18 @@
       <if test="refundReason != null">
         refund_reason,
       </if>
+      <if test="discountTotal != null">
+        discount_total,
+      </if>
+      <if test="discountDescription != null">
+        discount_description,
+      </if>
+      <if test="taxTotal != null">
+        tax_total,
+      </if>
+      <if test="taxDescription != null">
+        tax_description,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -138,6 +159,18 @@
       <if test="refundReason != null">
         #{refundReason,jdbcType=VARCHAR},
       </if>
+      <if test="discountTotal != null">
+        #{discountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="discountDescription != null">
+        #{discountDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="taxTotal != null">
+        #{taxTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="taxDescription != null">
+        #{taxDescription,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.PayLog">
@@ -173,6 +206,18 @@
       <if test="refundReason != null">
         refund_reason = #{refundReason,jdbcType=VARCHAR},
       </if>
+      <if test="discountTotal != null">
+        discount_total = #{discountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="discountDescription != null">
+        discount_description = #{discountDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="taxTotal != null">
+        tax_total = #{taxTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="taxDescription != null">
+        tax_description = #{taxDescription,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
       and product_id = #{productId,jdbcType=INTEGER}
@@ -190,7 +235,11 @@
       pay_mode = #{payMode,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      refund_reason = #{refundReason,jdbcType=VARCHAR}
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      discount_total = #{discountTotal,jdbcType=DECIMAL},
+      discount_description = #{discountDescription,jdbcType=VARCHAR},
+      tax_total = #{taxTotal,jdbcType=DECIMAL},
+      tax_description = #{taxDescription,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
       and product_id = #{productId,jdbcType=INTEGER}
       and contact_id = #{contactId,jdbcType=INTEGER}
@@ -199,7 +248,7 @@
 
 
   <insert id="insertBatch" parameterType="list">
-    insert into t_pay_log (user_id,product_id,contact_id,pay_date,product_name,price,quantity,subtotal,phone,address,contact_man,pay_mode)
+    insert into t_pay_log (user_id,product_id,contact_id,pay_date,product_name,price,quantity,subtotal,phone,address,contact_man,pay_mode,discount_total,discount_description,tax_total,tax_description)
     VALUES
     <foreach collection="list" item="com.xxxx.crm.vo.PayLog" separator=",">
       (#{com.xxxx.crm.vo.PayLog.userId},
@@ -213,7 +262,11 @@
       #{com.xxxx.crm.vo.PayLog.phone},
       #{com.xxxx.crm.vo.PayLog.address},
       #{com.xxxx.crm.vo.PayLog.contactMan},
-      #{com.xxxx.crm.vo.PayLog.payMode})
+      #{com.xxxx.crm.vo.PayLog.payMode},
+      #{com.xxxx.crm.vo.PayLog.discountTotal},
+      #{com.xxxx.crm.vo.PayLog.discountDescription},
+      #{com.xxxx.crm.vo.PayLog.taxTotal},
+      #{com.xxxx.crm.vo.PayLog.taxDescription})
     </foreach>
   </insert>
   <select id="selectByParams" parameterType="com.xxxx.crm.query.PayLogQuery" resultType="com.xxxx.crm.vo.PayLog">

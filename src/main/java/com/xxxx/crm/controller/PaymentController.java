@@ -2,12 +2,11 @@ package com.xxxx.crm.controller;
 
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
+import com.xxxx.crm.model.MoneyModel;
 import com.xxxx.crm.model.PaymentModel;
 import com.xxxx.crm.service.*;
 import com.xxxx.crm.utils.LoginUserUtil;
-import com.xxxx.crm.vo.Contact;
-import com.xxxx.crm.vo.Order;
-import com.xxxx.crm.vo.User;
+import com.xxxx.crm.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,11 +41,14 @@ public class PaymentController extends BaseController {
 
     @RequestMapping("toPayPage")
     public String toPayPage(HttpServletRequest request){
-        //Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
-        //Double total=orderService.getOrderTotal(userId);
+        Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
+        User user=userService.selectByPrimaryKey(userId);
         List<Order> orderList= (List<Order>) request.getSession().getAttribute("orderList");
-        Double total=orderService.getOrderTotal(orderList);
-        request.getSession().setAttribute("total",total);
+        List<DiscountUser> discountUserList= (List<DiscountUser>) request.getSession().getAttribute("discountUserList");
+        List<PayLog> payLogList=new ArrayList<>();
+        MoneyModel moneyModel=orderService.getTotal(user,orderList,discountUserList,payLogList);
+        request.getSession().setAttribute("moneyModel",moneyModel);
+        request.getSession().setAttribute("payLogList",payLogList);
         return "payment/pay_for_order";
     }
 
@@ -71,23 +73,17 @@ public class PaymentController extends BaseController {
         return "payment/pay_by_credit";
     }
 
-    @RequestMapping("recharge")
-    public String recharge(HttpServletRequest request, Integer contactId){
-        return "payment/wallet_recharge";
-    }
-
     @PostMapping("makePayment")
     @ResponseBody
     public ResultInfo makePayment(HttpServletRequest request, PaymentModel paymentModel){
-        System.out.println(paymentModel.getPayMode());
         Integer userId=LoginUserUtil.releaseUserIdFromCookie(request);
-        Double total= (Double) request.getSession().getAttribute("total");
+        MoneyModel moneyModel= (MoneyModel) request.getSession().getAttribute("moneyModel");
+        List<PayLog> payLogList= (List<PayLog>) request.getSession().getAttribute("payLogList");
         List<Order> orderList= (List<Order>) request.getSession().getAttribute("orderList");
-
         switch (paymentModel.getPayMode()){
-            case "change":cashPaymentService.makePayment(userId,paymentModel,orderList,total);break;
-            case "account":accountPaymentService.makePayment(userId,paymentModel,orderList,total);break;
-            case "credit":creditPaymentService.makePayment(userId,paymentModel,orderList,total);break;
+            case "change":cashPaymentService.makePayment(userId,paymentModel,orderList,moneyModel,payLogList);break;
+            case "account":accountPaymentService.makePayment(userId,paymentModel,orderList,moneyModel,payLogList);break;
+            case "credit":creditPaymentService.makePayment(userId,paymentModel,orderList,moneyModel,payLogList);break;
         }
         User user=userService.selectByPrimaryKey(userId);
         request.getSession().setAttribute("user",user);

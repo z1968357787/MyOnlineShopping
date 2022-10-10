@@ -8,14 +8,12 @@
     <result column="true_name" jdbcType="VARCHAR" property="trueName" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="balance" jdbcType="DOUBLE" property="balance" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, user_pwd, true_name, email, phone, is_valid, create_date, update_date, 
-    balance
+    id, user_name, user_pwd, true_name, email, phone, create_date, update_date, balance
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,12 +28,12 @@
   <insert id="insert" parameterType="com.xxxx.crm.vo.User">
     insert into t_user (id, user_name, user_pwd, 
       true_name, email, phone, 
-      is_valid, create_date, update_date, 
-      balance)
+      create_date, update_date, balance
+      )
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
       #{trueName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{isValid,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{balance,jdbcType=DOUBLE})
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.User">
     insert into t_user
@@ -57,9 +55,6 @@
       </if>
       <if test="phone != null">
         phone,
-      </if>
-      <if test="isValid != null">
-        is_valid,
       </if>
       <if test="createDate != null">
         create_date,
@@ -90,9 +85,6 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="isValid != null">
-        #{isValid,jdbcType=INTEGER},
-      </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
@@ -100,7 +92,7 @@
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="balance != null">
-        #{balance,jdbcType=DOUBLE},
+        #{balance,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -122,9 +114,6 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="isValid != null">
-        is_valid = #{isValid,jdbcType=INTEGER},
-      </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
@@ -132,7 +121,7 @@
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="balance != null">
-        balance = #{balance,jdbcType=DOUBLE},
+        balance = #{balance,jdbcType=DECIMAL},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -144,10 +133,9 @@
       true_name = #{trueName,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      is_valid = #{isValid,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
-      balance = #{balance,jdbcType=DOUBLE}
+      balance = #{balance,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

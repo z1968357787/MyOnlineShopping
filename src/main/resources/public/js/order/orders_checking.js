@@ -143,7 +143,14 @@ layui.use(['table','layer'],function(){
                     if(data.code==200){
                         //重新加载列表
                         tableIns.reload();
-                        window.location.href=ctx+"/payment/toPayPage";
+                        layui.layer.open({
+                            title:"优惠券选择",
+                            type:2,
+                            content:ctx+"/discountUser/index",
+                            dataType:"json",
+                            area:["700px","400px"],
+                            maxmin:true
+                        });
                     }else{
                         //删除失败的提醒
                         layer.msg(data.msg);

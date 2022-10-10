@@ -6,11 +6,10 @@
     <result column="credit_password" jdbcType="VARCHAR" property="creditPassword" />
     <result column="loan" jdbcType="DECIMAL" property="loan" />
     <result column="credit_score" jdbcType="INTEGER" property="creditScore" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="card_holder" jdbcType="VARCHAR" property="cardHolder" />
   </resultMap>
   <sql id="Base_Column_List">
-    credit_number, credit_password, loan, credit_score, user_id, card_holder
+    credit_number, credit_password, loan, credit_score, card_holder
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,11 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.xxxx.crm.vo.Credit">
     insert into t_credit (credit_number, credit_password, loan, 
-      credit_score, user_id, card_holder
-      )
+      credit_score, card_holder)
     values (#{creditNumber,jdbcType=VARCHAR}, #{creditPassword,jdbcType=VARCHAR}, #{loan,jdbcType=DECIMAL}, 
-      #{creditScore,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cardHolder,jdbcType=VARCHAR}
-      )
+      #{creditScore,jdbcType=INTEGER}, #{cardHolder,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Credit">
     insert into t_credit
@@ -44,9 +41,6 @@
       </if>
       <if test="creditScore != null">
         credit_score,
-      </if>
-      <if test="userId != null">
-        user_id,
       </if>
       <if test="cardHolder != null">
         card_holder,
@@ -65,9 +59,6 @@
       <if test="creditScore != null">
         #{creditScore,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
       <if test="cardHolder != null">
         #{cardHolder,jdbcType=VARCHAR},
       </if>
@@ -85,9 +76,6 @@
       <if test="creditScore != null">
         credit_score = #{creditScore,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
       <if test="cardHolder != null">
         card_holder = #{cardHolder,jdbcType=VARCHAR},
       </if>
@@ -99,7 +87,6 @@
     set credit_password = #{creditPassword,jdbcType=VARCHAR},
       loan = #{loan,jdbcType=DECIMAL},
       credit_score = #{creditScore,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
       card_holder = #{cardHolder,jdbcType=VARCHAR}
     where credit_number = #{creditNumber,jdbcType=VARCHAR}
   </update>

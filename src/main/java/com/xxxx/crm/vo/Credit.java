@@ -1,7 +1,5 @@
 package com.xxxx.crm.vo;
 
-import java.math.BigDecimal;
-
 public class Credit {
     private String creditNumber;
 
@@ -10,8 +8,6 @@ public class Credit {
     private Double loan;
 
     private Integer creditScore;
-
-    private Integer userId;
 
     private String cardHolder;
 
@@ -45,14 +41,6 @@ public class Credit {
 
     public void setCreditScore(Integer creditScore) {
         this.creditScore = creditScore;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getCardHolder() {

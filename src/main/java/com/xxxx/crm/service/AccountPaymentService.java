@@ -1,12 +1,10 @@
 package com.xxxx.crm.service;
 
 import com.xxxx.crm.dao.AccountMapper;
+import com.xxxx.crm.model.MoneyModel;
 import com.xxxx.crm.model.PaymentModel;
 import com.xxxx.crm.utils.AssertUtil;
-import com.xxxx.crm.vo.Account;
-import com.xxxx.crm.vo.Credit;
-import com.xxxx.crm.vo.Order;
-import com.xxxx.crm.vo.User;
+import com.xxxx.crm.vo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,7 +20,7 @@ public class AccountPaymentService extends PaymentService<Account,String>{
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void makePayment(Integer userId,PaymentModel paymentModel, List<Order> orderList,Double total) {
+    public void makePayment(Integer userId, PaymentModel paymentModel, List<Order> orderList, MoneyModel moneyModel,List<PayLog> payLogList) {
         /*
          *获取账号信息
          */
@@ -30,15 +28,15 @@ public class AccountPaymentService extends PaymentService<Account,String>{
         /*
          *检查金额是否充足
          */
-        AssertUtil.isTrue(account.getBalance()<total,"银行卡余额已不足");
+        AssertUtil.isTrue(account.getBalance()<moneyModel.getTaxTotal(),"银行卡余额已不足");
         /*
          *判断商品内存是否充足
          */
-        insertPayLogsBatch(userId,paymentModel,orderList);
+        insertPayLogsBatch(userId,paymentModel,orderList,payLogList,moneyModel);
         /*
          *支付金额
          */
-        account.setBalance(account.getBalance()-total);
+        account.setBalance(account.getBalance()-moneyModel.getTaxTotal());
 
         int num=accountMapper.updateByPrimaryKeySelective(account);
         AssertUtil.isTrue(num<1,"支付失败");

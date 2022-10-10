@@ -2,9 +2,11 @@ package com.xxxx.crm.controller;
 
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
+import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
+import com.xxxx.crm.vo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +25,25 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResultInfo userLogin(String userName,String userPwd){
         ResultInfo resultInfo=new ResultInfo();
-        UserModel userModel=userService.UserLogin(userName,userPwd);
+        UserModel userModel=userService.userLogin(userName,userPwd);
         resultInfo.setResult(userModel);
-        /*try{
+        return resultInfo;
+    }
 
-        }catch (ParamsException p){
-            resultInfo.setCode(p.getCode());
-            resultInfo.setMsg(p.getMsg());
-            p.printStackTrace();
-        }catch (Exception e){
-            resultInfo.setCode(500);
-            resultInfo.setMsg("登录失败");
-            e.printStackTrace();
-        }*/
+    @PostMapping("update")
+    @ResponseBody
+    public ResultInfo userUpdate(HttpServletRequest request,User user){
+        ResultInfo resultInfo=new ResultInfo();
+        User newUser=userService.userUpdate(user);
+        request.setAttribute("user",newUser);
+        return resultInfo;
+    }
+
+    @PostMapping("register")
+    @ResponseBody
+    public ResultInfo userRegister(RegisterModel registerModel){
+        ResultInfo resultInfo=new ResultInfo();
+        userService.userRegister(registerModel);
         return resultInfo;
     }
 

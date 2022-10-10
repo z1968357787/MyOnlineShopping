@@ -25,13 +25,17 @@ layui.use(['table','layer','laydate'],function(){
             {field: 'price', title: '单价', align:'center'},
             {field: 'quantity', title: '数量', align:'center'},
             {field: 'subtotal', title: '小计', align:'center'},
+            {field: 'discountTotal', title: '优惠后总额', align:'center'},
+            {field: 'discountDescription', title: '优惠方式',  align:'center'},
+            {field: 'taxTotal', title: '税后总额', align:'center'},
+            {field: 'taxDescription', title: '税金计算描述', align:'center'},
             {field: 'phone', title: '联系电话', align:'center'},
             {field: 'address', title: '联系地址', align:'center'},
             {field: 'contactMan', title: '联系人', align:'center'},
             {field: 'payMode', title: '支付方式', align:'center'},
             {field: 'state', title: '订单状态', align:'center'},
             {field: 'payDate', title: '支付日期',  align:'center'},
-            {title: '操作', templet:'#payLogListBar',fixed:"right",align:"center", minWidth:150}
+            {title: '操作', templet:'#payLogListBar',align:"center", minWidth:150}
         ]]
     });
 

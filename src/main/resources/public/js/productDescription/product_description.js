@@ -32,9 +32,17 @@ layui.use(['table','layer'],function(){
             {field: 'supplier', title: '供应商',  align:'center'},
             {field: 'listTime', title: '上架时间', align:'center'},
             {field: 'stock', title: '库存', align:'center'},
-            {field: 'count', title: '购买数量',edit:'text',align:'center'}
-            //{title: '操作', templet:'#productDescriptionListBar',fixed:"right",align:"center", minWidth:150}
+            {field: 'count', title: '购买数量',edit:'number',align:'center'},
+            {title: '购买数量', templet:'#productDescriptionListBar',fixed:"right",align:"center", minWidth:150}
         ]]
+    });
+
+    table.on('tool(productDescriptions)', function(obj){
+        if(obj.event==="edit"){
+            var count=$("input[name='count']").val();
+            obj.data.count=count;
+        }
+        //console.log(obj)
     });
 
     /**
@@ -102,7 +110,7 @@ layui.use(['table','layer'],function(){
     //头工具栏事件
 
     table.on('toolbar(productDescriptions)', function(obj){
-        var checkStatus = table.checkStatus("productDescriptionTable");
+        var checkStatus = table.checkStatus(obj.config.id);
         console.log(checkStatus.data)
         switch(obj.event){
             case 'add':
@@ -116,9 +124,6 @@ layui.use(['table','layer'],function(){
                 break;
         };
     });
-    /**
-     * 删除
-     */
 
     function  payForOrder(data){
         if(data.length==0){
@@ -158,7 +163,15 @@ layui.use(['table','layer'],function(){
                         //$.cookie("userIdStr",result.result.userIdStr);
                         //$.cookie("total",result.result.total);
 
-                        window.location.href=ctx+"/payment/toPayPage";
+                        layui.layer.open({
+                            title:"优惠券选择",
+                            type:2,
+                            content:ctx+"/discountUser/index",
+                            dataType:"json",
+                            area:["700px","400px"],
+                            maxmin:true
+                        });
+                        //window.location.href=ctx+"/payment/toPayPage";
                     }else{
                         //删除失败的提醒
                         layer.msg(data.msg);

@@ -1,11 +1,12 @@
 package com.xxxx.crm.service;
 
 import com.xxxx.crm.dao.CreditMapper;
+import com.xxxx.crm.model.MoneyModel;
 import com.xxxx.crm.model.PaymentModel;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.vo.Credit;
 import com.xxxx.crm.vo.Order;
-import com.xxxx.crm.vo.User;
+import com.xxxx.crm.vo.PayLog;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,7 +22,7 @@ public class CreditPaymentService extends PaymentService<Credit,String>{
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void makePayment(Integer userId,PaymentModel paymentModel, List<Order> orderList,Double total) {
+    public void makePayment(Integer userId, PaymentModel paymentModel, List<Order> orderList, MoneyModel moneyModel, List<PayLog> payLogList) {
         /*
          *获取账号信息
          */
@@ -33,11 +34,11 @@ public class CreditPaymentService extends PaymentService<Credit,String>{
         /*
          *判断商品内存是否充足
          */
-        insertPayLogsBatch(userId,paymentModel,orderList);
+        insertPayLogsBatch(userId,paymentModel,orderList,payLogList,moneyModel);
         /*
          *支付金额
          */
-        credit.setLoan(credit.getLoan()+total);
+        credit.setLoan(credit.getLoan()+moneyModel.getTaxTotal());
 
         int num=creditMapper.updateByPrimaryKeySelective(credit);
         AssertUtil.isTrue(num<1,"支付失败");

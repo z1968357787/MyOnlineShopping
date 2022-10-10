@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.crm.dao.DiscountMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.Discount" >
+    <id column="discount_id" property="discountId" jdbcType="INTEGER" />
+    <result column="discount_description" property="discountDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    discount_id, discount_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_discount
+    where discount_id = #{discountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_discount
+    where discount_id = #{discountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.Discount" >
+    insert into t_discount (discount_id, discount_description)
+    values (#{discountId,jdbcType=INTEGER}, #{discountDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Discount" >
+    insert into t_discount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        discount_id,
+      </if>
+      <if test="discountDescription != null" >
+        discount_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        #{discountId,jdbcType=INTEGER},
+      </if>
+      <if test="discountDescription != null" >
+        #{discountDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.Discount" >
+    update t_discount
+    <set >
+      <if test="discountDescription != null" >
+        discount_description = #{discountDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where discount_id = #{discountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.Discount" >
+    update t_discount
+    set discount_description = #{discountDescription,jdbcType=VARCHAR}
+    where discount_id = #{discountId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.DiscountQuery" resultType="com.xxxx.crm.vo.Discount">
+    select <include refid="Base_Column_List" /> from t_discount
+    <where>
+      <if test="discountDescription!=null and discountDescription !=''">
+        and discount_description like concat ('%',#{discountDescription},'%')
+      </if>
+    </where>
+  </select>
+</mapper>

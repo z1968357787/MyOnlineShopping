@@ -2,9 +2,9 @@ package com.xxxx.crm.service;
 
 import com.xxxx.crm.base.BaseService;
 import com.xxxx.crm.dao.UserMapper;
+import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.utils.AssertUtil;
-import com.xxxx.crm.utils.Md5Util;
 import com.xxxx.crm.utils.UserIDBase64;
 import com.xxxx.crm.vo.User;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class UserService extends BaseService<User,Integer> {
@@ -20,7 +21,7 @@ public class UserService extends BaseService<User,Integer> {
     private UserMapper userMapper;
 
 
-    public UserModel UserLogin(String userName,String userPwd){
+    public UserModel userLogin(String userName, String userPwd){
         checkLoginParams(userName,userPwd);
         User user=userMapper.queryUserByName(userName);
         AssertUtil.isTrue(user==null,"用户姓名不存在!");
@@ -34,6 +35,7 @@ public class UserService extends BaseService<User,Integer> {
         AssertUtil.isTrue(user==null,"待更新记录不存在！");
         checkPasswordParams(user,oldPwd,newPwd,repeatPwd);
         user.setUserPwd(newPwd);
+        user.setUpdateDate(new Date());
         AssertUtil.isTrue(userMapper.updateByPrimaryKeySelective(user)<1,"修改密码失败！");
     }
 
@@ -42,6 +44,12 @@ public class UserService extends BaseService<User,Integer> {
         AssertUtil.isTrue(!user.getUserPwd().equals(oldPwd),"原始密码不正确！");
         AssertUtil.isTrue(StringUtils.isBlank(newPwd),"新密码不能为空！");
         AssertUtil.isTrue(newPwd.equals(oldPwd),"新密码不能与原始密码相同！");
+        AssertUtil.isTrue(StringUtils.isBlank(repeatPwd),"确认密码不能为空！");
+        AssertUtil.isTrue(!newPwd.equals(repeatPwd),"确认密码与新密码不一致！");
+    }
+
+    private void checkPasswordParams(String newPwd, String repeatPwd) {
+        AssertUtil.isTrue(StringUtils.isBlank(newPwd),"新密码不能为空！");
         AssertUtil.isTrue(StringUtils.isBlank(repeatPwd),"确认密码不能为空！");
         AssertUtil.isTrue(!newPwd.equals(repeatPwd),"确认密码与新密码不一致！");
     }
@@ -63,5 +71,37 @@ public class UserService extends BaseService<User,Integer> {
     private void checkLoginParams(String userName, String userPwd) {
         AssertUtil.isTrue(StringUtils.isBlank(userName),"用户姓名不能为空!");
         AssertUtil.isTrue(StringUtils.isBlank(userPwd),"用户密码不能为空!");
+    }
+
+    private void checkRegisterParams(String userName) {
+        AssertUtil.isTrue(StringUtils.isBlank(userName),"用户帐号不能为空!");
+        User user=userMapper.queryUserByName(userName);
+        AssertUtil.isTrue(user!=null,"该用户已存在");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void userRegister(RegisterModel registerModel) {
+        checkRegisterParams(registerModel.getUserName());
+        checkPasswordParams(registerModel.getUserPwd(),registerModel.getRepeatPwd());
+        User user=new User();
+        user.setUserName(registerModel.getUserName());
+        user.setUserPwd(registerModel.getUserPwd());
+        user.setTrueName(registerModel.getTrueName());
+        user.setEmail(registerModel.getEmail());
+        user.setPhone(registerModel.getPhone());
+        user.setCreateDate(new Date());
+        user.setUpdateDate(new Date());
+        int num=userMapper.insertSelective(user);
+        AssertUtil.isTrue(num!=1,"注册失败");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public User userUpdate(User user) {
+        AssertUtil.isTrue(StringUtils.isBlank(user.getUserName()),"用户帐号不能为空");
+        AssertUtil.isTrue(StringUtils.isBlank(user.getPhone()),"用户手机不能为空");
+        int num=userMapper.updateByPrimaryKeySelective(user);
+        AssertUtil.isTrue(num!=1,"更新失败");
+        User newUser=userMapper.selectByPrimaryKey(user.getId());
+        return newUser;
     }
 }

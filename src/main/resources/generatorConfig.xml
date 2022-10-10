@@ -63,7 +63,7 @@
 
 
 
-        <table tableName="t_pay_log" domainObjectName="PayLog"
+        <table tableName="t_credit" domainObjectName="Credit"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

@@ -7,7 +7,6 @@ import com.xxxx.crm.dao.AccountMapper;
 import com.xxxx.crm.dao.TransferLogMapper;
 import com.xxxx.crm.dao.UserMapper;
 import com.xxxx.crm.model.TransferLogModel;
-import com.xxxx.crm.query.OrderQuery;
 import com.xxxx.crm.query.TransferLogQuery;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.vo.*;

@@ -1,11 +1,7 @@
 package com.xxxx.crm.vo;
 
-import java.math.BigDecimal;
-
 public class Account {
     private String accountNumber;
-
-    private Integer userId;
 
     private String accountPassword;
 
@@ -19,14 +15,6 @@ public class Account {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber == null ? null : accountNumber.trim();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getAccountPassword() {

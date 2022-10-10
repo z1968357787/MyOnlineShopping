@@ -16,11 +16,11 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
-                    <input type="text" name="username" lay-verify="required|account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" >
+                    <input type="text" name="username" lay-verify="account" placeholder="用户名或者邮箱" autocomplete="off" class="layui-input" >
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
-                    <input type="password" name="password" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input" >
+                    <input type="password" name="password" lay-verify="password" placeholder="密码" autocomplete="off" class="layui-input" >
                 </div>
                 <div class="layui-form-item">
                     <input type="checkbox" name="rememberMe" id="rememberMe" value="true" lay-skin="primary" title="自动登录">
@@ -28,7 +28,11 @@
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">登 录</button>
                 </div>
+                <div class="layui-form-item">
+                    <button type="button" class="layui-btn layui-btn-fluid layui-btn-normal" id="register">注 册</button>
+                </div>
             </form>
+
         </div>
     </div>
 </div>

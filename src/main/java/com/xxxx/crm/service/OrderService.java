@@ -4,16 +4,19 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xxxx.crm.adapter.ITaxCalculatorAdapter;
 import com.xxxx.crm.base.BaseService;
+import com.xxxx.crm.dao.DiscountUserMapper;
 import com.xxxx.crm.dao.OrderMapper;
 import com.xxxx.crm.dao.ProductDescriptionMapper;
-import com.xxxx.crm.model.OrderKeyModel;
+import com.xxxx.crm.dao.TaxCalculatorMapper;
+import com.xxxx.crm.factory.ServicesFactory;
+import com.xxxx.crm.model.MoneyModel;
 import com.xxxx.crm.model.OrderModel;
 import com.xxxx.crm.query.OrderQuery;
+import com.xxxx.crm.strategy.ISalePricingStrategy;
 import com.xxxx.crm.utils.AssertUtil;
-import com.xxxx.crm.vo.Order;
-import com.xxxx.crm.vo.OrderKey;
-import com.xxxx.crm.vo.ProductDescription;
+import com.xxxx.crm.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class OrderService extends BaseService<Order,OrderKey> {
@@ -35,6 +34,16 @@ public class OrderService extends BaseService<Order,OrderKey> {
 
     @Resource
     private ProductDescriptionMapper productDescriptionMapper;
+
+    @Resource
+    private TaxCalculatorMapper taxCalculatorMapper;
+
+    @Resource
+    private DiscountUserMapper discountUserMapper;
+
+    private ISalePricingStrategy salePricingStrategy;
+
+    private ITaxCalculatorAdapter taxCalculatorAdapter;
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void updateOrder(Order newOrder){
@@ -184,12 +193,44 @@ public class OrderService extends BaseService<Order,OrderKey> {
         return orderMapper.selectByPrimaryKey(orderKey);
     }
 
-    public Double getOrderTotal(List<Order> orderList){
+    public MoneyModel getTotal(User user, List<Order> orderList, List<DiscountUser> discountUserList, List<PayLog> payLogList){
+        checkDiscountUsers(discountUserList);
+        MoneyModel moneyModel=new MoneyModel();
         Double total=0.0;
         for(Order order:orderList){
+            PayLog payLog=new PayLog();
+            payLog.setProductId(order.getProductId());
+            payLog.setPayDate(new Date());
+            payLog.setProductName(order.getProductName());
+            payLog.setQuantity(order.getQuantity());
+            payLog.setSubtotal(order.getSubtotal());
+            payLog.setPrice(order.getPrice());
+            payLogList.add(payLog);
             total+=order.getSubtotal();
         }
-        return total;
+        moneyModel.setSumTotal(total);
+        /*
+         *计算优惠
+         */
+        if(discountUserList!=null){
+            salePricingStrategy=ServicesFactory.getInstance().getSalePricingStrategy(discountUserList);
+            salePricingStrategy.getTotal(user,payLogList,moneyModel);
+        }
+        /*
+         *计算税金
+         */
+        List<TaxCalculator> taxCalculatorList =taxCalculatorMapper.selectByState();
+        if(taxCalculatorList !=null){
+            taxCalculatorAdapter=ServicesFactory.getInstance().getTaxCalculatorAdapter(taxCalculatorList);
+            taxCalculatorAdapter.getTaxes(user,payLogList,moneyModel);
+        }
+        return moneyModel;
+    }
+
+    private void checkDiscountUsers(List<DiscountUser> discountUserList){
+        for(DiscountUser discountUser:discountUserList){
+            AssertUtil.isTrue(discountUser.getCount()==0,"优惠券数量为0");
+        }
     }
 
 }

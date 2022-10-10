@@ -1,10 +1,14 @@
 package com.xxxx.crm.service;
 
+import com.xxxx.crm.adapter.ITaxCalculatorAdapter;
 import com.xxxx.crm.base.BaseService;
+import com.xxxx.crm.dao.DiscountUserMapper;
 import com.xxxx.crm.dao.OrderMapper;
 import com.xxxx.crm.dao.PayLogMapper;
 import com.xxxx.crm.dao.ProductDescriptionMapper;
+import com.xxxx.crm.model.MoneyModel;
 import com.xxxx.crm.model.PaymentModel;
+import com.xxxx.crm.strategy.ISalePricingStrategy;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.vo.*;
 import org.springframework.stereotype.Service;
@@ -26,7 +30,10 @@ public abstract class PaymentService<T,TD> extends BaseService<T,TD>{
     @Resource
     protected ProductDescriptionMapper productDescriptionMapper;
 
-    public abstract void makePayment(Integer userId,PaymentModel paymentModel, List<Order> orderList,Double total);
+    @Resource
+    private DiscountUserMapper discountUserMapper;
+
+    public abstract void makePayment(Integer userId, PaymentModel paymentModel, List<Order> orderList, MoneyModel moneyModel,List<PayLog> payLogList);
 
     public abstract Object checkUserParams(String userName, String userPwd);
 
@@ -45,6 +52,18 @@ public abstract class PaymentService<T,TD> extends BaseService<T,TD>{
 
     }
 
+    protected void updateDiscount(MoneyModel moneyModel){
+        DiscountUser discountUser=moneyModel.getDiscountUser();
+        if(discountUser!=null){
+            discountUser.setCount(discountUser.getCount()-1);
+            if(discountUser.getCount()==0){
+                discountUserMapper.deleteByPrimaryKey(discountUser);
+            }else {
+                discountUserMapper.updateByPrimaryKeySelective(discountUser);
+            }
+        }
+    }
+
     public void deleteOrders(List<Order> orderList){
         List<OrderKey> orderKeyList=new ArrayList<>();
         for(Order order:orderList){
@@ -55,29 +74,24 @@ public abstract class PaymentService<T,TD> extends BaseService<T,TD>{
     }
 
 
-    protected void insertPayLogsBatch(Integer userId,PaymentModel paymentModel,List<Order> orderList){
+    protected void insertPayLogsBatch(Integer userId,PaymentModel paymentModel,List<Order> orderList,List<PayLog> payLogList,MoneyModel moneyModel){
         checkProductAmple(orderList);
-        List<PayLog> payLogList=new ArrayList<>();
-        for(Order order:orderList){
-            PayLog payLog=new PayLog();
+        for(PayLog payLog:payLogList){
             payLog.setUserId(userId);
-            payLog.setProductId(order.getProductId());
             payLog.setContactId(paymentModel.getContactId());
             payLog.setPayDate(new Date());
             payLog.setPayMode(paymentModel.getPayMode());
             payLog.setAddress(paymentModel.getAddress());
             payLog.setPhone(paymentModel.getPhone());
             payLog.setContactMan(paymentModel.getContactMan());
-            payLog.setProductName(order.getProductName());
-            payLog.setQuantity(order.getQuantity());
-            payLog.setSubtotal(order.getSubtotal());
-            payLog.setPrice(order.getPrice());
-            payLogList.add(payLog);
         }
         int num=payLogMapper.insertBatch(payLogList);
         AssertUtil.isTrue(num<1,"支付失败");
         deleteOrders(orderList);
+        updateDiscount(moneyModel);
     }
+
+
 
 
 }

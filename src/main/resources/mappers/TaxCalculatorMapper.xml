@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.crm.dao.TaxCalculatorMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.TaxCalculator">
+    <id column="tax_id" jdbcType="INTEGER" property="taxId" />
+    <result column="tax_description" jdbcType="VARCHAR" property="taxDescription" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tax_id, tax_description, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_tax_calculator
+    where tax_id = #{taxId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_tax_calculator
+    where tax_id = #{taxId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.TaxCalculator">
+    insert into t_tax_calculator (tax_id, tax_description, state
+      )
+    values (#{taxId,jdbcType=INTEGER}, #{taxDescription,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.TaxCalculator">
+    insert into t_tax_calculator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taxId != null">
+        tax_id,
+      </if>
+      <if test="taxDescription != null">
+        tax_description,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taxId != null">
+        #{taxId,jdbcType=INTEGER},
+      </if>
+      <if test="taxDescription != null">
+        #{taxDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.TaxCalculator">
+    update t_tax_calculator
+    <set>
+      <if test="taxDescription != null">
+        tax_description = #{taxDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tax_id = #{taxId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.crm.vo.TaxCalculator">
+    update t_tax_calculator
+    set tax_description = #{taxDescription,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where tax_id = #{taxId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.TaxCalculatorQuery" resultType="com.xxxx.crm.vo.TaxCalculator">
+    select <include refid="Base_Column_List" /> from t_tax_calculator
+    <where>
+      <if test="taxDescription!=null and taxDescription !=''">
+        and tax_description like concat ('%',#{taxDescription},'%')
+      </if>
+      <if test="state!=null and state !=''">
+        and state like concat ('%',#{state},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByState" resultType="com.xxxx.crm.vo.TaxCalculator">
+    select <include refid="Base_Column_List" /> from t_tax_calculator where state='已选择'
+  </select>
+
+  <update id="updateTaxCalculator" parameterType="String">
+    update t_tax_calculator set state=#{state} where tax_id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </update>
+</mapper>
