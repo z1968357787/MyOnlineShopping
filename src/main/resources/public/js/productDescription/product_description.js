@@ -23,7 +23,7 @@ layui.use(['table','layer'],function(){
         toolbar: "#toolbarDemo",
         //id : "saleChanceListTable",
         cols : [[
-            {type: "checkbox", fixed:"center"},
+            //{type: "checkbox", fixed:"center"},
             {field: "productId", title:'商品编号',fixed:"true"},
             {field: 'productName', title: '商品名',align:"center"},
             {field: 'productDescription', title: '商品描述',  align:'center'},
@@ -32,18 +32,36 @@ layui.use(['table','layer'],function(){
             {field: 'supplier', title: '供应商',  align:'center'},
             {field: 'listTime', title: '上架时间', align:'center'},
             {field: 'stock', title: '库存', align:'center'},
-            {field: 'count', title: '购买数量',edit:'number',align:'center'},
-            {title: '购买数量', templet:'#productDescriptionListBar',fixed:"right",align:"center", minWidth:150}
+            //{field: 'count', title: '购买数量',edit:'number',align:'center'},
+            {title: '购买操作', templet:'#productDescriptionListBar',align:"center", minWidth:150}
         ]]
     });
 
     table.on('tool(productDescriptions)', function(obj){
-        if(obj.event==="edit"){
-            var count=$("input[name='count']").val();
-            obj.data.count=count;
+        var data = obj.data;
+        var isOrder;
+        if(obj.event==="add"){
+            isOrder=1;
+        }else {
+            isOrder=0;
         }
-        //console.log(obj)
+        openAddCountPage(data.productId,isOrder);
+
     });
+
+    function openAddCountPage(productId,isOrder){
+        var title="<h3>商品数量选择</h3>";
+        var url=ctx+"/order/toAddCountPage"+"?productId="+productId+"&isOrder="+isOrder;
+        /*弹出层*/
+        layui.layer.open({
+            title:title,
+            type:2,
+            content:url,
+            area:["700px","400px"],
+            maxmin:true
+        })
+
+    }
 
     /**
      * 格式化分配状态

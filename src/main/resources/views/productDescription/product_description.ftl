@@ -40,6 +40,7 @@
     </table>
 
     <script type="text/html" id="toolbarDemo">
+        <!--
         <div class="layui-btn-container">
             <a class="layui-btn layui-btn-normal addNews_btn" lay-event="add">
                 <i class="layui-icon">&#xe657;</i>
@@ -49,7 +50,7 @@
                 <i class="layui-icon">&#xe65e;</i>
                 支付
             </a>
-        </div>
+        </div>-->
 
     </script>
 
@@ -58,7 +59,12 @@
     <script id="productDescriptionListBar" type="text/html">
 
         <!--<input type="number" name="count" lay-verify="required"  placeholder="购买数量" class="layui-input">-->
-        <a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="add">
+            <i class="layui-icon">&#xe657;</i>
+        </a>
+        <a class="layui-btn layui-btn-xs" lay-event="pay">
+            <i class="layui-icon">&#xe65e;</i>
+        </a>
     </script>
 </form>
 

@@ -36,7 +36,7 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">转账金额</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" lay-verify="required"
+            <input type="number" class="layui-input" lay-verify="required"
                    name="money" id="money"  value="${(contact.phone)!}" placeholder="请输入转账金额">
         </div>
     </div>

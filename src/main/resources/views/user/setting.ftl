@@ -26,13 +26,13 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">邮箱</label>
+                <label class="layui-form-label required">邮箱</label>
                 <div class="layui-input-block">
                     <input type="email" name="email"  placeholder="请输入邮箱"  value="${(user.email)!}" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">真实姓名</label>
+                <label class="layui-form-label required">真实姓名</label>
                 <div class="layui-input-block">
                     <input type="text" name="trueName"  placeholder="请输入真实姓名"  value="${(user.trueName)!}" class="layui-input">
                 </div>

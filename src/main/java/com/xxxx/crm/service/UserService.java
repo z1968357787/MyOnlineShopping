@@ -5,6 +5,7 @@ import com.xxxx.crm.dao.UserMapper;
 import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.utils.AssertUtil;
+import com.xxxx.crm.utils.PhoneUtil;
 import com.xxxx.crm.utils.UserIDBase64;
 import com.xxxx.crm.vo.User;
 import org.apache.commons.lang3.StringUtils;
@@ -79,10 +80,24 @@ public class UserService extends BaseService<User,Integer> {
         AssertUtil.isTrue(user!=null,"该用户已存在");
     }
 
+    private void checkUserInfoParams(RegisterModel registerModel) {
+        AssertUtil.isTrue(StringUtils.isBlank(registerModel.getTrueName()),"用户真实姓名不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(registerModel.getPhone()),"用户手机号不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(registerModel.getEmail()),"用户邮箱不能为空!");
+        AssertUtil.isTrue(!PhoneUtil.isMobile(registerModel.getPhone()),"用户手机号输入不合法");
+    }
+    private void checkUserInfoParams(User user) {
+        AssertUtil.isTrue(StringUtils.isBlank(user.getTrueName()),"用户真实姓名不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(user.getPhone()),"用户手机号不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(user.getEmail()),"用户邮箱不能为空!");
+        AssertUtil.isTrue(!PhoneUtil.isMobile(user.getPhone()),"用户手机号输入不合法");
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public void userRegister(RegisterModel registerModel) {
         checkRegisterParams(registerModel.getUserName());
         checkPasswordParams(registerModel.getUserPwd(),registerModel.getRepeatPwd());
+        checkUserInfoParams(registerModel);
         User user=new User();
         user.setUserName(registerModel.getUserName());
         user.setUserPwd(registerModel.getUserPwd());
@@ -97,8 +112,7 @@ public class UserService extends BaseService<User,Integer> {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public User userUpdate(User user) {
-        AssertUtil.isTrue(StringUtils.isBlank(user.getUserName()),"用户帐号不能为空");
-        AssertUtil.isTrue(StringUtils.isBlank(user.getPhone()),"用户手机不能为空");
+        checkUserInfoParams(user);
         int num=userMapper.updateByPrimaryKeySelective(user);
         AssertUtil.isTrue(num!=1,"更新失败");
         User newUser=userMapper.selectByPrimaryKey(user.getId());

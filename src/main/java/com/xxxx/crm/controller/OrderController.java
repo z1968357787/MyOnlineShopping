@@ -36,11 +36,22 @@ public class OrderController extends BaseController {
     @Resource
     private OrderService orderService;
 
-    @PostMapping("pay_order")
+    /*@PostMapping("pay_order")
     @ResponseBody
     public ResultInfo payOrder(HttpServletRequest request,@RequestParam("list")String orderString) throws IOException {
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         List<Order> orderList=orderService.getOrders(userId,orderString);
+        request.getSession().setAttribute("orderList",orderList);
+        request.getSession().setAttribute("isOrder",0);
+        return success("操作成功");
+    }*/
+
+    @PostMapping("pay_order")
+    @ResponseBody
+    public ResultInfo payOrder(HttpServletRequest request,Integer productId,Integer quantity) throws IOException {
+        Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
+        System.out.println(productId+"????????????");
+        List<Order> orderList=orderService.getOrders(userId,productId,quantity);
         request.getSession().setAttribute("orderList",orderList);
         request.getSession().setAttribute("isOrder",0);
         return success("操作成功");
@@ -55,11 +66,19 @@ public class OrderController extends BaseController {
         return success("操作成功");
     }
 
-    @PostMapping("add_order")
+    /*@PostMapping("add_order")
     @ResponseBody
     public ResultInfo addOrder(HttpServletRequest request,@RequestParam("list")String orderString) throws IOException {
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         orderService.insertOrder(userId,orderString);
+        return success("操作成功");
+    }*/
+
+    @PostMapping("add_order")
+    @ResponseBody
+    public ResultInfo addOrder(HttpServletRequest request,Integer productId,Integer quantity) throws IOException {
+        Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
+        orderService.insertOrder(userId,productId,quantity);
         return success("操作成功");
     }
 
@@ -110,5 +129,13 @@ public class OrderController extends BaseController {
         }
         return "order/add_update";
     }
+
+    @RequestMapping("toAddCountPage")
+    public String toAddCountPage(HttpServletRequest request,Integer productId,Integer isOrder){
+        request.setAttribute("productId",productId);
+        request.setAttribute("isOrder",isOrder);
+        return "productDescription/add_count";
+    }
+
 
 }

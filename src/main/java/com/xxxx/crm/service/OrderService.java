@@ -38,9 +38,6 @@ public class OrderService extends BaseService<Order,OrderKey> {
     @Resource
     private TaxCalculatorMapper taxCalculatorMapper;
 
-    @Resource
-    private DiscountUserMapper discountUserMapper;
-
     private ISalePricingStrategy salePricingStrategy;
 
     private ITaxCalculatorAdapter taxCalculatorAdapter;
@@ -54,6 +51,25 @@ public class OrderService extends BaseService<Order,OrderKey> {
         newOrder.setSubtotal(oldOrder.getPrice()*newOrder.getQuantity());
         int num=orderMapper.updateByPrimaryKeySelective(newOrder);
         AssertUtil.isTrue(num!=1,"更新失败");
+    }
+
+    public List<Order> getOrders(Integer userId,Integer productId,Integer quantity){
+        ProductDescription productDescription=productDescriptionMapper.selectByPrimaryKey(productId);
+        Order order=transform(userId,productDescription,quantity);
+        List<Order> orderList=new ArrayList<>();
+        orderList.add(order);
+        return orderList;
+    }
+
+    private Order transform(Integer userId,ProductDescription productDescription,Integer quantity){
+        Order order=new Order();
+        order.setUserId(userId);
+        order.setProductId(productDescription.getProductId());
+        order.setProductName(productDescription.getProductName());
+        order.setPrice(productDescription.getPrice());
+        order.setQuantity(quantity);
+        order.setSubtotal(productDescription.getPrice()*quantity);
+        return order;
     }
 
     public List<Order> getOrders(Integer userId,String orderString) throws IOException {
@@ -233,4 +249,10 @@ public class OrderService extends BaseService<Order,OrderKey> {
         }
     }
 
+    public void insertOrder(Integer userId, Integer productId, Integer quantity) {
+        ProductDescription productDescription=productDescriptionMapper.selectByPrimaryKey(productId);
+        Order order=transform(userId,productDescription,quantity);
+        int num=orderMapper.insertSelective(order);
+        AssertUtil.isTrue(num!=1,"加入失败");
+    }
 }

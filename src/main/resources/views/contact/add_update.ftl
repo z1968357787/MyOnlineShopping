@@ -12,7 +12,7 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" lay-verify="required"
+            <input type="number" class="layui-input" lay-verify="required"
                    name="phone" id="phone"  value="${(contact.phone)!}" placeholder="请输入联系电话">
         </div>
     </div>

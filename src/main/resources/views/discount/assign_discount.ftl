@@ -12,14 +12,14 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">用户Id</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" lay-verify="required"
+            <input type="number" class="layui-input" lay-verify="required"
                    name="userId" id="userId" placeholder="请输入用户Id">
         </div>
     </div>
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">优惠券张数</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input"  name="count"
+            <input type="number" class="layui-input"  name="count"
                    id="count" placeholder="请输入优惠券张数">
         </div>
     </div>

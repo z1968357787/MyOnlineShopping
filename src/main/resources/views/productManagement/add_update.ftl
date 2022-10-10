@@ -26,7 +26,7 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">单价</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" lay-verify="required"
+            <input type="number" class="layui-input" lay-verify="required"
                    name="price" id="price"  value="${(product.price)!}" placeholder="请输入商品单价">
         </div>
     </div>
@@ -54,7 +54,7 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">库存数量</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" name="stock" id="stock"
+            <input type="number" class="layui-input" name="stock" id="stock"
                    lay-verify="required"  value="${(product.stock)!}" placeholder="请输入商品库存">
         </div>
     </div>

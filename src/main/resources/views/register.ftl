@@ -43,7 +43,7 @@
     <div class="layui-form-item layui-row layui-col-xs12">
         <label class="layui-form-label">手机号码</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" name="phone" id="phone"
+            <input type="number" class="layui-input" name="phone" id="phone"
                    lay-verify="required" placeholder="请输入手机号码">
         </div>
     </div>

@@ -9,8 +9,10 @@ import com.xxxx.crm.dao.ContactMapper;
 import com.xxxx.crm.model.OrderModel;
 import com.xxxx.crm.query.ContactQuery;
 import com.xxxx.crm.utils.AssertUtil;
+import com.xxxx.crm.utils.PhoneUtil;
 import com.xxxx.crm.vo.Contact;
 import com.xxxx.crm.vo.Order;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +54,7 @@ public class ContactService extends BaseService<Contact,Integer> {
         /*
          * 逻辑判断
          */
-        CheckContactParams(contact);
+        checkContactParams(contact);
 
         /*
          *插入数据
@@ -61,17 +63,25 @@ public class ContactService extends BaseService<Contact,Integer> {
         AssertUtil.isTrue(num!=1,"插入失败");
     }
 
-    private void CheckContactParams(Contact contact) {
-        AssertUtil.isTrue(contact.getPhone()==null,"联系电话不能为空");
-        AssertUtil.isTrue(contact.getAddress()==null,"联系地址不能为空");
-        AssertUtil.isTrue(contact.getContactMan()==null,"联系人不能为空");
+    private void checkContactParams(Contact contact) {
+        AssertUtil.isTrue(StringUtils.isBlank(contact.getPhone()),"联系电话不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(contact.getAddress()),"联系地址不能为空!");
+        AssertUtil.isTrue(StringUtils.isBlank(contact.getContactMan()),"联系人不能为空!");
+        AssertUtil.isTrue(!PhoneUtil.isMobile(contact.getPhone()),"用户手机号输入不合法");
+    }
+
+    private void checkPhoneParams(Contact contact) {
+        if(!StringUtils.isBlank(contact.getPhone())){
+            AssertUtil.isTrue(!PhoneUtil.isMobile(contact.getPhone()),"手机号输入不合法");
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void updateContact(Contact contact) throws IOException {
         /*
-         *插入数据
+         *更新数据
          */
+        checkPhoneParams(contact);
         int num=contactMapper.updateByPrimaryKeySelective(contact);
 
         AssertUtil.isTrue(num!=1,"更新失败");
