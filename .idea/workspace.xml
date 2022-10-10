@@ -7,18 +7,9 @@
     <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="Second commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ContactService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/ContactService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/OrderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/OrderModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/contact/add_update.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/contact/add_update.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/discount/assign_discount.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/discount/assign_discount.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/order/add_update.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/order/add_update.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/productDescription/product_description.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/productDescription/product_description.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/productManagement/add_update.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/productManagement/add_update.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/register.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/register.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/transferLog/transfer_money.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/transferLog/transfer_money.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/user/setting.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/user/setting.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +201,8 @@
       <workItem from="1665219111680" duration="12064000" />
       <workItem from="1665277844128" duration="9231000" />
       <workItem from="1665309947068" duration="14218000" />
-      <workItem from="1665365622781" duration="6618000" />
+      <workItem from="1665365622781" duration="7885000" />
+      <workItem from="1665391449253" duration="2257000" />
     </task>
     <task id="LOCAL-00001" summary="Second commit">
       <created>1664700332040</created>
@@ -233,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665365721810</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Second commit">
+      <created>1665372565410</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665372565410</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

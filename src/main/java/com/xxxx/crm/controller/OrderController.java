@@ -48,10 +48,9 @@ public class OrderController extends BaseController {
 
     @PostMapping("pay_order")
     @ResponseBody
-    public ResultInfo payOrder(HttpServletRequest request,Integer productId,Integer quantity) throws IOException {
+    public ResultInfo payOrder(HttpServletRequest request,OrderModel orderModel) throws IOException {
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
-        System.out.println(productId+"????????????");
-        List<Order> orderList=orderService.getOrders(userId,productId,quantity);
+        List<Order> orderList=orderService.getOrders(userId,orderModel);
         request.getSession().setAttribute("orderList",orderList);
         request.getSession().setAttribute("isOrder",0);
         return success("操作成功");
@@ -76,9 +75,9 @@ public class OrderController extends BaseController {
 
     @PostMapping("add_order")
     @ResponseBody
-    public ResultInfo addOrder(HttpServletRequest request,Integer productId,Integer quantity) throws IOException {
+    public ResultInfo addOrder(HttpServletRequest request,OrderModel orderModel) throws IOException {
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
-        orderService.insertOrder(userId,productId,quantity);
+        orderService.insertOrder(userId,orderModel);
         return success("操作成功");
     }
 
@@ -93,12 +92,6 @@ public class OrderController extends BaseController {
     @PostMapping("update_order")
     @ResponseBody
     public ResultInfo updateOrder(Order order) throws IOException, ParseException {
-        //Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
-        //Order order=new Order();
-        //order.setUserId(orderKeyModel.getUserId());
-        //order.setProductId(orderKeyModel.getProductId());
-        //order.setPayDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(orderKeyModel.getPayDate()));
-        //order.setQuantity(orderKeyModel.getQuantity());
         orderService.updateOrder(order);
         return success("操作成功");
     }

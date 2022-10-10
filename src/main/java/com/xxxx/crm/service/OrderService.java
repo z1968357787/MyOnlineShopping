@@ -45,15 +45,17 @@ public class OrderService extends BaseService<Order,OrderKey> {
     @Transactional(propagation = Propagation.REQUIRED)
     public void updateOrder(Order newOrder){
         AssertUtil.isTrue(newOrder.getProductId()==null,"该商品号不存在");
+        AssertUtil.isTrue(newOrder.getQuantity()<=0,"商品数量小于为0，请重输");
         ProductDescription productDescription=productDescriptionMapper.selectByPrimaryKey(newOrder.getProductId());
-        Order oldOrder=orderMapper.selectByPrimaryKey(newOrder);
-        AssertUtil.isTrue(productDescription.getStock()+oldOrder.getQuantity()- newOrder.getQuantity()<0,"库存数量不够，无法进行更改");
-        newOrder.setSubtotal(oldOrder.getPrice()*newOrder.getQuantity());
+        AssertUtil.isTrue(newOrder.getQuantity()>productDescription.getStock(),"库存数量不够，无法进行更改");
+        newOrder.setSubtotal(productDescription.getPrice()*newOrder.getQuantity());
         int num=orderMapper.updateByPrimaryKeySelective(newOrder);
         AssertUtil.isTrue(num!=1,"更新失败");
     }
 
-    public List<Order> getOrders(Integer userId,Integer productId,Integer quantity){
+    public List<Order> getOrders(Integer userId,OrderModel orderModel){
+        Integer productId=orderModel.getProductId();
+        Integer quantity=orderModel.getQuantity();
         ProductDescription productDescription=productDescriptionMapper.selectByPrimaryKey(productId);
         Order order=transform(userId,productDescription,quantity);
         List<Order> orderList=new ArrayList<>();
@@ -62,6 +64,8 @@ public class OrderService extends BaseService<Order,OrderKey> {
     }
 
     private Order transform(Integer userId,ProductDescription productDescription,Integer quantity){
+        AssertUtil.isTrue(quantity<=0,"购物数量小于0，请重选！");
+        AssertUtil.isTrue(productDescription.getStock()<quantity,"商品库存已不足");
         Order order=new Order();
         order.setUserId(userId);
         order.setProductId(productDescription.getProductId());
@@ -72,53 +76,38 @@ public class OrderService extends BaseService<Order,OrderKey> {
         return order;
     }
 
+    /*
     public List<Order> getOrders(Integer userId,String orderString) throws IOException {
-        /*
-         * 获取orderModel集合
-         */
+
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(orderString);
         JavaType jt = mapper.getTypeFactory().constructParametricType(ArrayList.class, OrderModel.class);
         //List<OrderModel> list =  (List<OrderModel>)mapper.readValue(orderModelList, jt);
         List<OrderModel> list =  (List<OrderModel>)mapper.readValue(orderString, jt);
-        /*
-         * 将orderModel转换成order
-         */
+
         List<Order> orderList=transform(userId,list);
 
-        /*
-         *插入数据
-         */
         return orderList;
-    }
-
-
+    }*/
+    /*
     @Transactional(propagation = Propagation.REQUIRED)
     public void insertOrder(Integer userId,String orderString) throws IOException {
-        /*
-        * 获取orderModel集合
-        */
+
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(orderString);
         JavaType jt = mapper.getTypeFactory().constructParametricType(ArrayList.class, OrderModel.class);
         //List<OrderModel> list =  (List<OrderModel>)mapper.readValue(orderModelList, jt);
         List<OrderModel> list =  (List<OrderModel>)mapper.readValue(orderString, jt);
-        /*
-         * 将orderModel转换成order
-         */
+
         List<Order> orderList=transform(userId,list);
-        /*
-         *检查是否有重复的订单
-         */
+
         List<Order> newOrderList=checkDuplicateProducts(orderList);
-        /*
-         *插入数据
-         */
+
         if(newOrderList.size()!=0){
             orderMapper.insertBatch(newOrderList);
         }
-    }
-
+    }*/
+    /*
     private List<Order> checkDuplicateProducts(List<Order> orderList){
         List<Order> newOrderList=new ArrayList<>();
         for(Order newOrder:orderList){
@@ -132,7 +121,7 @@ public class OrderService extends BaseService<Order,OrderKey> {
             }
         }
         return newOrderList;
-    }
+    }*/
 
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -168,6 +157,7 @@ public class OrderService extends BaseService<Order,OrderKey> {
         return orderKeyList;
     }*/
 
+    /*
     private List<Order> transform(Integer userId, List<OrderModel> list) {
         List<Order> orderList=new ArrayList<>();
         for(OrderModel orderModel:list){
@@ -183,7 +173,7 @@ public class OrderService extends BaseService<Order,OrderKey> {
             orderList.add(order);
         }
         return orderList;
-    }
+    }*/
 
     public Map<String,Object> queryProductByParams(OrderQuery orderQuery){
         //return productService.queryProductByParams(productQuery);
@@ -249,10 +239,21 @@ public class OrderService extends BaseService<Order,OrderKey> {
         }
     }
 
-    public void insertOrder(Integer userId, Integer productId, Integer quantity) {
+    public void insertOrder(Integer userId, OrderModel orderModel) {
+        Integer productId=orderModel.getProductId();
+        Integer quantity=orderModel.getQuantity();
         ProductDescription productDescription=productDescriptionMapper.selectByPrimaryKey(productId);
         Order order=transform(userId,productDescription,quantity);
-        int num=orderMapper.insertSelective(order);
+        Order oldOlder=orderMapper.selectByPrimaryKey(order);
+        int num;
+        if(oldOlder==null){
+            num=orderMapper.insertSelective(order);
+        }else {
+            AssertUtil.isTrue(order.getQuantity()>productDescription.getStock(),"库存数量不够，无法进行更改");
+            order.setQuantity(order.getQuantity()+oldOlder.getQuantity());
+            order.setSubtotal(order.getSubtotal()+oldOlder.getSubtotal());
+            num=orderMapper.updateByPrimaryKeySelective(order);
+        }
         AssertUtil.isTrue(num!=1,"加入失败");
     }
 }

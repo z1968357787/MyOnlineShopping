@@ -113,6 +113,7 @@ public class UserService extends BaseService<User,Integer> {
     @Transactional(propagation = Propagation.REQUIRED)
     public User userUpdate(User user) {
         checkUserInfoParams(user);
+        user.setUpdateDate(new Date());
         int num=userMapper.updateByPrimaryKeySelective(user);
         AssertUtil.isTrue(num!=1,"更新失败");
         User newUser=userMapper.selectByPrimaryKey(user.getId());
