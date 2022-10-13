@@ -102,7 +102,7 @@ public class PayLogService extends BaseService<PayLog, PayLogKey> {
         AssertUtil.isTrue(!oldPayLog.getState().equals("申请退款"),"该订单不是处于申请退款状态");
         User user=userMapper.selectByPrimaryKey(newPayLog.getUserId());
         AssertUtil.isTrue(payLogMapper==null,"无此用户信息");
-        user.setBalance(user.getBalance()+oldPayLog.getSubtotal());
+        user.setBalance(user.getBalance()+oldPayLog.getTaxTotal());
         int num=userMapper.updateByPrimaryKeySelective(user);
         AssertUtil.isTrue(num!=1,"操作失败");
         num=payLogMapper.updateByPrimaryKeySelective(newPayLog);

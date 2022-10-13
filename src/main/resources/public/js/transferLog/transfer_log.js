@@ -134,9 +134,4 @@ layui.use(['table','layer','laydate'],function(){
         })
 
     }
-
-
-
-
-
 });

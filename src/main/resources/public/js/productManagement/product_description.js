@@ -221,8 +221,4 @@ layui.use(['table','layer'],function(){
         })
 
     }
-
-
-
-
 });
