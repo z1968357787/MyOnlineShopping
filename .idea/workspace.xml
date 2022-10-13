@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="third commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/transferLog/transfer_log.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/transferLog/transfer_log.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/xxxx/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/xxxx/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/postSale/post_sale.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/postSale/post_sale.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +31,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="4b92c9f6-3efe-40b2-9838-92531d0fc558" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,7 +69,7 @@
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -234,6 +234,8 @@
       <workItem from="1665573547408" duration="3302000" />
       <workItem from="1665591823859" duration="626000" />
       <workItem from="1665640842925" duration="624000" />
+      <workItem from="1665665397584" duration="849000" />
+      <workItem from="1665668276040" duration="297000" />
     </task>
     <task id="LOCAL-00001" summary="Second commit">
       <created>1664700332040</created>
@@ -270,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665393800115</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="third commit">
+      <created>1665665670009</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665665670009</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

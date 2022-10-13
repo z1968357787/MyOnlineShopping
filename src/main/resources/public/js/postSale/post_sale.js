@@ -71,19 +71,21 @@ layui.use(['table','layer','laydate'],function(){
         switch(obj.event){
             case 'complete':
                 //alert("添加OK");
-                state='已完成'
+                state='已完成';
+                setState(checkStatus.data,state);
                 break;
             case 'approve':
                 //删除
-                state='允许退款'
+                state='允许退款';
+                setState(checkStatus.data,state);
                 break;
             case 'refuse':
                 //删除
-                state='拒绝退款'
+                state='拒绝退款';
+                setState(checkStatus.data,state);
                 break;
 
         };
-        setState(checkStatus.data,state);
     });
 
     function  setState(data,state){

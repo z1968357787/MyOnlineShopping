@@ -48,12 +48,13 @@ layui.use(['table','layer'],function(){
         switch(obj.event){
             case 'take':
                 url=ctx+"/taxCalculator/take";
+                takeTaxCalculator(checkStatus.data,url);
                 break;
             case 'cancel':
                 url=ctx+"/taxCalculator/cancel";
+                takeTaxCalculator(checkStatus.data,url);
                 break;
         };
-        takeTaxCalculator(checkStatus.data,url);
     });
 
     function  takeTaxCalculator(data,url){

@@ -102,12 +102,13 @@ layui.use(['table','layer','laydate'],function(){
         switch(obj.event){
             case 'cash_in':
                 select=0;
+                openTransferPage(select);
                 break;
             case 'cash_out':
                 select=1;
+                openTransferPage(select);
                 break;
         };
-        openTransferPage(select);
     });
 
     function openTransferPage(select){
