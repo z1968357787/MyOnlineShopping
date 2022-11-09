@@ -31,6 +31,13 @@
                                name="taxTotal" id="taxTotal"  value="${(moneyModel.taxTotal)!}元" readonly="readonly">
                     </div>
                 </div>
+                <div class="layui-form-item layui-row layui-col-xs12">
+                    <label class="layui-form-label">零钱剩余</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" lay-verify="required"
+                               name="balance" id="balance"  value="${(user.balance)!}元" readonly="readonly">
+                    </div>
+                </div>
             </div>
         </form>
 

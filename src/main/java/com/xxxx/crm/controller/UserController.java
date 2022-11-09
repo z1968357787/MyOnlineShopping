@@ -4,6 +4,8 @@ import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
+import com.xxxx.crm.query.ContactQuery;
+import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
 import com.xxxx.crm.vo.User;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @RequestMapping("user")
@@ -35,7 +39,7 @@ public class UserController extends BaseController {
     public ResultInfo userUpdate(HttpServletRequest request,User user){
         ResultInfo resultInfo=new ResultInfo();
         User newUser=userService.userUpdate(user);
-        request.setAttribute("user",newUser);
+        request.getSession().setAttribute("user",newUser);
         return resultInfo;
     }
 
@@ -65,4 +69,33 @@ public class UserController extends BaseController {
     public String toSettingPage(){
         return "user/setting";
     }
+
+    @RequestMapping("toManagementPage")
+    public String toManagementPage(){
+        return "user/management";
+    }
+
+    @RequestMapping("addOrUpdateUserPage")
+    public String addOrUpdateUserPage(HttpServletRequest request,Integer id){
+        if(id !=null){
+            User user=userService.selectByPrimaryKey(id);
+            request.setAttribute("userManage",user);
+            return "user/update_user";
+        }
+        return "user/add_user";
+    }
+
+    @RequestMapping("list")
+    @ResponseBody
+    public Map<String,Object> queryProductByParams(UserQuery userQuery){
+        return userService.queryUserByParams(userQuery);
+    }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteUser(Integer ids[]) throws IOException {
+        userService.deleteUser(ids);
+        return success("删除成功");
+    }
+
 }

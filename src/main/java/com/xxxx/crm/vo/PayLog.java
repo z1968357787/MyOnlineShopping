@@ -29,6 +29,10 @@ public class PayLog extends PayLogKey {
 
     private String taxDescription;
 
+    private Double score;
+
+    private String evaluation;
+
     public String getProductName() {
         return productName;
     }
@@ -51,8 +55,8 @@ public class PayLog extends PayLogKey {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
-        this.discountTotal=subtotal;
         this.taxTotal=subtotal;
+        this.discountTotal=subtotal;
     }
 
     public String getPhone() {
@@ -142,5 +146,21 @@ public class PayLog extends PayLogKey {
 
     public void setTaxDescription(String taxDescription) {
         this.taxDescription = taxDescription == null ? null : taxDescription.trim();
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation == null ? null : evaluation.trim();
     }
 }

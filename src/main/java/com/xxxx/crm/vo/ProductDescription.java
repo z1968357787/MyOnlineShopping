@@ -1,9 +1,5 @@
 package com.xxxx.crm.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 public class ProductDescription {
     private Integer productId;
 
@@ -17,10 +13,11 @@ public class ProductDescription {
 
     private String supplier;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String listTime;
 
     private Integer stock;
+
+    private Double score;
 
     public Integer getProductId() {
         return productId;
@@ -84,5 +81,13 @@ public class ProductDescription {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }

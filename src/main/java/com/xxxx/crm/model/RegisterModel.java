@@ -7,6 +7,8 @@ public class RegisterModel {
     private String trueName;
     private String email;
     private String phone;
+    private Double balance;
+    private String role;
 
     public String getUserName() {
         return userName;
@@ -54,5 +56,21 @@ public class RegisterModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

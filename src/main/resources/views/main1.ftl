@@ -67,25 +67,6 @@
                                 </dd>
                             </dl>
                         </li>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-flag"></i><span class="layui-left-nav"> 商品管理</span> <span class="layui-nav-more"></span></a><dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-7" data-tab="product_description/management" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 商品信息管理</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-8" data-tab="payLog/postSale" target="_self"><i class="fa fa-tachometer"></i><span class="layui-left-nav"> 订单状态处理</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-9" data-tab="discount/index" target="_self"><i class="fa fa-tags"></i><span class="layui-left-nav"> 优惠券发配</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10" data-tab="taxCalculator/index" target="_self"><i class="fa fa-star"></i><span class="layui-left-nav"> 税金计算器</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11" data-tab="user/toManagementPage" target="_self"><i class="fa fa-user"></i><span class="layui-left-nav"> 用户管理</span></a>
-                                </dd>
-                            </dl>
-                        </li>
                     <span class="layui-nav-bar" style="top: 201px; height: 0px; opacity: 0;"></span>
                 </ul>
         </div>

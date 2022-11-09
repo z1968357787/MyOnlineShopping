@@ -1,12 +1,16 @@
 package com.xxxx.crm.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xxxx.crm.base.BaseService;
 import com.xxxx.crm.dao.UserMapper;
 import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
+import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.utils.PhoneUtil;
 import com.xxxx.crm.utils.UserIDBase64;
+import com.xxxx.crm.vo.Contact;
 import com.xxxx.crm.vo.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService extends BaseService<User,Integer> {
@@ -106,6 +113,12 @@ public class UserService extends BaseService<User,Integer> {
         user.setPhone(registerModel.getPhone());
         user.setCreateDate(new Date());
         user.setUpdateDate(new Date());
+        if(registerModel.getBalance()!=null){
+            user.setBalance(registerModel.getBalance());
+        }
+        if (registerModel.getRole()!=null){
+            user.setRole(registerModel.getRole());
+        }
         int num=userMapper.insertSelective(user);
         AssertUtil.isTrue(num!=1,"注册失败");
     }
@@ -118,5 +131,35 @@ public class UserService extends BaseService<User,Integer> {
         AssertUtil.isTrue(num!=1,"更新失败");
         User newUser=userMapper.selectByPrimaryKey(user.getId());
         return newUser;
+    }
+
+    public Map<String, Object> queryUserByParams(UserQuery userQuery) {
+        Map<String,Object> map=new HashMap<>();
+
+        /*
+         *开始分页
+         */
+
+        PageHelper.startPage(userQuery.getPage(),userQuery.getLimit());
+
+        PageInfo<User> pageInfo=new PageInfo<>(userMapper.selectByParams(userQuery));
+
+        map.put("code",0);
+        map.put("msg","success");
+        map.put("count",pageInfo.getTotal());
+        map.put("data",pageInfo.getList());
+
+        return map;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteUser(Integer ids[]) throws IOException {
+        /*
+         *删除数据
+         */
+
+        int num=userMapper.deleteBatch(ids);
+
+        AssertUtil.isTrue(num<1,"删除失败");
     }
 }

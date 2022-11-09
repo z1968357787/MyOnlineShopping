@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.crm.dao.EvaluationMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.crm.vo.Evaluation" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DECIMAL" />
+    <result column="evaluation" property="evaluation" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xxxx.crm.vo.Evaluation" >
+    insert into v_evaluation (user_id, user_name, product_id, 
+      product_name, supplier, pay_date, 
+      score, evaluation)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
+      #{productName,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, #{payDate,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=DECIMAL}, #{evaluation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.crm.vo.Evaluation" >
+    insert into v_evaluation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="payDate != null" >
+        pay_date,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="evaluation != null" >
+        evaluation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluation != null" >
+        #{evaluation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.EvaluationQuery" resultType="com.xxxx.crm.vo.Evaluation">
+    select * from v_evaluation
+    <where>
+      <if test="userName!=null and userName !=''">
+        and user_name like concat ('%',#{userName},'%')
+      </if>
+      <if test="productName!=null and productName !=''">
+        and product_name like concat ('%',#{productName},'%')
+      </if>
+      <if test="supplier!=null and supplier !=''">
+        and supplier like concat ('%',#{supplier},'%')
+      </if>
+      <if test="evaluation!=null and evaluation !=''">
+        and evaluation like concat ('%',#{evaluation},'%')
+      </if>
+    </where>
+  </select>
+</mapper>

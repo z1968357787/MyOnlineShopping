@@ -35,7 +35,9 @@ layui.use(['table','layer','laydate'],function(){
             {field: 'payMode', title: '支付方式', align:'center'},
             {field: 'state', title: '订单状态', align:'center'},
             {field: 'payDate', title: '支付日期',  align:'center'},
-            {title: '操作', templet:'#payLogListBar',align:"center", minWidth:150}
+            {field: 'score', title: '订单评分', align:'center'},
+            {field: 'evaluation', title: '订单评价',  align:'center'},
+            {title: '操作', templet:'#payLogListBar',align:"center", minWidth:180}
         ]]
     });
 
@@ -72,7 +74,7 @@ layui.use(['table','layer','laydate'],function(){
      */
 
     function openRefundDialog(userId,productId,contactId,payDate){
-        var title="<h3>退款模块</h3>";
+        var title="<h3>退款申请</h3>";
         var url=ctx+"/payLog/toRefundPage"+"?userId="+userId+"&productId="+productId+"&contactId="+contactId+"&payDate="+payDate;
         //判断
 
@@ -85,7 +87,22 @@ layui.use(['table','layer','laydate'],function(){
             area:["500px","250px"],
             maxmin:true
         })
+    }
 
+    function openEvaluationDialog(userId,productId,contactId,payDate){
+        var title="<h3>订单评价</h3>";
+        var url=ctx+"/payLog/toEvaluationPage"+"?userId="+userId+"&productId="+productId+"&contactId="+contactId+"&payDate="+payDate;
+        //判断
+
+        /*弹出层*/
+
+        layui.layer.open({
+            title:title,
+            type:2,
+            content:url,
+            area:["500px","280px"],
+            maxmin:true
+        })
     }
 
 
@@ -99,8 +116,39 @@ layui.use(['table','layer','laydate'],function(){
         if(obj.event === 'refund'){
             //传入当前对象的id
             openRefundDialog(data.userId,data.productId,data.contactId,data.payDate);
+        }else if (obj.event==='evaluation'){
+            openEvaluationDialog(data.userId,data.productId,data.contactId,data.payDate)
+        }else if(obj.event==='cancel'){
+            layer.confirm('真的删除行么', function(index){
+                //关闭弹出层
+                layer.close(index);
+                var list=[];
+                var temp={};
+                temp.userId=data.userId;
+                temp.productId=data.productId;
+                temp.contactId=data.contactId;
+                temp.payDate=data.payDate;
+                list.push(temp);
+                //发送ajax删除
+                $.ajax({
+                    type:"post",
+                    url:ctx+"/payLog/deleteEvaluation",
+                    data : "list="+JSON.stringify(list),
+                    dataType:"json",
+                    success:function (data){
+                        if(data.code==200){
+                            layer.msg("删除OK");
+                            tableIns.reload();
+                            parent.location.reload()
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                });
+            });
         }
     });
+
 
 
 });

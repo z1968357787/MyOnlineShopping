@@ -2,9 +2,9 @@ package com.xxxx.crm.controller;
 
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
+import com.xxxx.crm.model.EvaluationModel;
 import com.xxxx.crm.model.PayLogKeyModel;
 import com.xxxx.crm.query.PayLogQuery;
-import com.xxxx.crm.query.TransferLogQuery;
 import com.xxxx.crm.service.PayLogService;
 import com.xxxx.crm.utils.LoginUserUtil;
 import org.springframework.stereotype.Controller;
@@ -30,13 +30,13 @@ public class PayLogController extends BaseController {
     public Map<String,Object> queryProductByParams(HttpServletRequest request, PayLogQuery payLogQuery){
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         payLogQuery.setUserId(userId);
-        return payLogService.queryProductByParams(payLogQuery);
+        return payLogService.queryPayLogByParams(payLogQuery);
     }
 
     @RequestMapping("list2")
     @ResponseBody
     public Map<String,Object> queryProductByParams2(PayLogQuery payLogQuery){
-        return payLogService.queryProductByParams(payLogQuery);
+        return payLogService.queryPayLogByParams(payLogQuery);
     }
 
     @RequestMapping("index")
@@ -53,11 +53,34 @@ public class PayLogController extends BaseController {
         return "payLog/request_refund";
     }
 
+    @RequestMapping("toEvaluationPage")
+    public String toEvaluationPage(HttpServletRequest request,PayLogKeyModel payLogKeyModel){
+        request.setAttribute("userId",payLogKeyModel.getUserId());
+        request.setAttribute("productId",payLogKeyModel.getProductId());
+        request.setAttribute("contactId",payLogKeyModel.getContactId());
+        request.setAttribute("payDate",payLogKeyModel.getPayDate());
+        return "payLog/paylog_evaluation";
+    }
+
     @PostMapping("processRefund")
     @ResponseBody
     public ResultInfo processRefund(PayLogKeyModel payLogKeyModel) throws ParseException {
         payLogService.processRefund(payLogKeyModel);
         return success("申请退款成功");
+    }
+
+    @PostMapping("addEvaluation")
+    @ResponseBody
+    public ResultInfo addEvaluation(EvaluationModel evaluationModel) throws ParseException {
+        payLogService.addEvaluation(evaluationModel);
+        return success("订单评价成功");
+    }
+
+    @PostMapping("deleteEvaluation")
+    @ResponseBody
+    public ResultInfo deleteEvaluation(@RequestParam("list")String payLogKeyString) throws ParseException, IOException {
+        payLogService.deleteEvaluation(payLogKeyString);
+        return success("订单评价成功");
     }
 
     @RequestMapping("postSale")

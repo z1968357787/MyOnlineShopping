@@ -32,6 +32,7 @@ layui.use(['table','layer'],function(){
             {field: 'supplier', title: '供应商',  align:'center'},
             {field: 'listTime', title: '上架时间', align:'center'},
             {field: 'stock', title: '库存', align:'center'},
+            {field: 'score', title: '订单评分', align:'center'},
             //{field: 'count', title: '购买数量',edit:'text',align:'center'}
             {title: '操作', templet:'#productDescriptionListBar',fixed:"right",align:"center", minWidth:150}
         ]]

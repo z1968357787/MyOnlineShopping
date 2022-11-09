@@ -1,11 +1,12 @@
-layui.use(['form', 'layer'], function () {
+layui.use(['form', 'layer','laydate'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
-        $ = layui.jquery;
+        $ = layui.jquery,
+        laydate=layui.laydate;
 
 
     /*添加表单添加信息*/
-    form.on("submit(register)",function(data){
+    form.on("submit(addOrUpdateUser)",function(data){
        // console.log(data.field);
         //提交的加载层
         var index=layer.msg("数据提交中，请稍后...",{
@@ -15,17 +16,21 @@ layui.use(['form', 'layer'], function () {
         });
         //提交数据url
         var url=ctx+"/user/register";
+        //判断，当前页面的隐藏域有数据，说明做修改操作
+        if($("input[name='id']").val()){
+            url=ctx+"/user/update";
+        }
         //发送ajax添加
        $.post(url,data.field,function(data){
            if(data.code==200){
                 //添加成功了
-               layer.msg("注册成功了");
+               layer.msg("操作成功了");
                //关闭加载层
                layer.close(index);
                //iframe
                layer.closeAll("iframe");
                //重新加载
-               //parent.location.reload();
+               parent.location.reload();
            }else{
                //失败了
                layer.msg(data.msg);
@@ -40,5 +45,7 @@ layui.use(['form', 'layer'], function () {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index); //再执行关闭
     });
+
+
 
 });

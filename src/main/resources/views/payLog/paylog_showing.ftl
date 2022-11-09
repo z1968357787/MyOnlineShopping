@@ -78,7 +78,9 @@
 
     <!--操作-->
     <script id="payLogListBar" type="text/html">
-        <a class="layui-btn layui-btn-xs" id="refund" lay-event="refund">申请退款</a>
+        <a class="layui-btn layui-btn-xs" id="evaluation" lay-event="evaluation">评价</a>
+        <a class="layui-btn layui-btn-xs" id="evaluation" lay-event="cancel">取消</a>
+        <a class="layui-btn layui-btn-xs" id="refund" lay-event="refund">退款</a>
         <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>-->
     </script>
 

@@ -11,9 +11,11 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, user_pwd, true_name, email, phone, create_date, update_date, balance
+    id, user_name, user_pwd, true_name, email, phone, create_date, update_date, balance, 
+    role
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,12 +30,12 @@
   <insert id="insert" parameterType="com.xxxx.crm.vo.User">
     insert into t_user (id, user_name, user_pwd, 
       true_name, email, phone, 
-      create_date, update_date, balance
-      )
+      create_date, update_date, balance, 
+      role)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
       #{trueName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL}
-      )
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL}, 
+      #{role,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.User">
     insert into t_user
@@ -65,6 +67,9 @@
       <if test="balance != null">
         balance,
       </if>
+      <if test="role != null">
+        role,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -93,6 +98,9 @@
       </if>
       <if test="balance != null">
         #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,6 +131,9 @@
       <if test="balance != null">
         balance = #{balance,jdbcType=DECIMAL},
       </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -135,7 +146,8 @@
       phone = #{phone,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
-      balance = #{balance,jdbcType=DECIMAL}
+      balance = #{balance,jdbcType=DECIMAL},
+      role = #{role,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -146,4 +158,27 @@
      t_user
     where user_name=#{userName}
   </select>
+
+  <select id="selectByParams" parameterType="com.xxxx.crm.query.UserQuery" resultType="com.xxxx.crm.vo.User">
+    select <include refid="Base_Column_List" /> from t_user
+    <where>
+       role !='超级管理员'
+      <if test="userName!=null and userName !=''">
+        and user_name like concat ('%',#{userName},'%')
+      </if>
+      <if test="trueName!=null and trueName !=''">
+        and true_name like concat ('%',#{trueName},'%')
+      </if>
+      <if test="role!=null and role !=''">
+        and role like concat ('%',#{role},'%')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteBatch">
+    delete from t_user where id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

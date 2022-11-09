@@ -5,15 +5,16 @@
     <id column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="product_description" jdbcType="VARCHAR" property="productDescription" />
-    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="classification" jdbcType="VARCHAR" property="classification" />
     <result column="supplier" jdbcType="VARCHAR" property="supplier" />
     <result column="list_time" jdbcType="TIMESTAMP" property="listTime" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
   </resultMap>
   <sql id="Base_Column_List">
     product_id, product_name, product_description, price, classification, supplier, list_time, 
-    stock
+    stock, score
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +29,12 @@
   <insert id="insert" parameterType="com.xxxx.crm.vo.ProductDescription">
     insert into t_product_description (product_id, product_name, product_description, 
       price, classification, supplier, 
-      list_time, stock)
+      list_time, stock, score
+      )
     values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productDescription,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DOUBLE}, #{classification,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
-      #{listTime,jdbcType=TIMESTAMP}, #{stock,jdbcType=INTEGER})
+      #{price,jdbcType=DECIMAL}, #{classification,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
+      #{listTime,jdbcType=TIMESTAMP}, #{stock,jdbcType=INTEGER}, #{score,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.ProductDescription">
     insert into t_product_description
@@ -48,7 +51,7 @@
       <if test="price != null">
         price,
       </if>
-      <if test="classification != null and classification !=''">
+      <if test="classification != null">
         classification,
       </if>
       <if test="supplier != null">
@@ -59,6 +62,9 @@
       </if>
       <if test="stock != null">
         stock,
+      </if>
+      <if test="score != null">
+        score,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -72,7 +78,7 @@
         #{productDescription,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DOUBLE},
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="classification != null">
         #{classification,jdbcType=VARCHAR},
@@ -86,6 +92,9 @@
       <if test="stock != null">
         #{stock,jdbcType=INTEGER},
       </if>
+      <if test="score != null">
+        #{score,jdbcType=DECIMAL},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.ProductDescription">
@@ -98,9 +107,9 @@
         product_description = #{productDescription,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DOUBLE},
+        price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="classification != null and classification!=''">
+      <if test="classification != null">
         classification = #{classification,jdbcType=VARCHAR},
       </if>
       <if test="supplier != null">
@@ -112,6 +121,9 @@
       <if test="stock != null">
         stock = #{stock,jdbcType=INTEGER},
       </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DECIMAL},
+      </if>
     </set>
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
@@ -119,13 +131,15 @@
     update t_product_description
     set product_name = #{productName,jdbcType=VARCHAR},
       product_description = #{productDescription,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DECIMAL},
       classification = #{classification,jdbcType=VARCHAR},
       supplier = #{supplier,jdbcType=VARCHAR},
       list_time = #{listTime,jdbcType=TIMESTAMP},
-      stock = #{stock,jdbcType=INTEGER}
+      stock = #{stock,jdbcType=INTEGER},
+      score = #{score,jdbcType=DECIMAL}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
+
   <select id="selectByParams" parameterType="com.xxxx.crm.query.ProductQuery" resultType="com.xxxx.crm.vo.ProductDescription">
     select <include refid="Base_Column_List" /> from t_product_description
     <where>
@@ -148,14 +162,14 @@
 
   <delete id="deleteBatch">
     delete from t_product_description where product_id in
-    <foreach collection="array" item="id" separator="," open="(" close=")">
+    <foreach close=")" collection="array" item="id" open="(" separator=",">
       #{id}
     </foreach>
   </delete>
 
   <update id="updateBatch">
     update t_product_description set classification='others' where product_id in
-    <foreach collection="array" item="id" separator="," open="(" close=")">
+    <foreach close=")" collection="array" item="id" open="(" separator=",">
       #{id}
     </foreach>
   </update>

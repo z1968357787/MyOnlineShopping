@@ -237,6 +237,7 @@ public class OrderService extends BaseService<Order,OrderKey> {
         for(DiscountUser discountUser:discountUserList){
             AssertUtil.isTrue(discountUser.getCount()==0,"优惠券数量为0");
         }
+
     }
 
     public void insertOrder(Integer userId, OrderModel orderModel) {

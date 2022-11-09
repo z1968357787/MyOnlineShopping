@@ -5,8 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="third commit">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/postSale/post_sale.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/postSale/post_sale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/DiscountUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/DiscountUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/PayLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/PayLogMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/RegisterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/RegisterModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/payLog/paylog_showing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/payLog/paylog_showing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/main.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/main.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/payment/pay_for_order.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/payment/pay_for_order.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,20 +87,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../javacore_locate/scanner" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/views" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\public\js\productDescription" />
-      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\views\productDescription" />
-      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\public\js\user" />
-      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\public\js" />
       <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\views" />
+      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\public\js\user" />
+      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\views\user" />
+      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\views\evaluation" />
+      <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\public\js\evaluation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\javacore_locate2\OnlineShopping\src\main\resources\views\order" />
@@ -235,7 +259,21 @@
       <workItem from="1665591823859" duration="626000" />
       <workItem from="1665640842925" duration="624000" />
       <workItem from="1665665397584" duration="849000" />
-      <workItem from="1665668276040" duration="297000" />
+      <workItem from="1665668276040" duration="614000" />
+      <workItem from="1665755548887" duration="3309000" />
+      <workItem from="1665814101923" duration="328000" />
+      <workItem from="1665834098684" duration="1538000" />
+      <workItem from="1666000381084" duration="76000" />
+      <workItem from="1666084063183" duration="1066000" />
+      <workItem from="1666102473065" duration="19000" />
+      <workItem from="1666409566309" duration="601000" />
+      <workItem from="1666577770495" duration="1886000" />
+      <workItem from="1666611047159" duration="36000" />
+      <workItem from="1666766202071" duration="505000" />
+      <workItem from="1666788204104" duration="1590000" />
+      <workItem from="1667895368438" duration="12013000" />
+      <workItem from="1667959993577" duration="11120000" />
+      <workItem from="1667980195205" duration="7082000" />
     </task>
     <task id="LOCAL-00001" summary="Second commit">
       <created>1664700332040</created>
@@ -279,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665665670009</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="third commit">
+      <created>1665668724794</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665668724794</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,16 +346,5 @@
     <MESSAGE value="Second commit" />
     <MESSAGE value="third commit" />
     <option name="LAST_COMMIT_MESSAGE" value="third commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

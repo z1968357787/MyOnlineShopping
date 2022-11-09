@@ -5,7 +5,7 @@ layui.use(['form', 'layer'], function () {
 
 
     /*添加表单添加信息*/
-    form.on("submit(register)",function(data){
+    form.on("submit(addEvaluation)",function(data){
        // console.log(data.field);
         //提交的加载层
         var index=layer.msg("数据提交中，请稍后...",{
@@ -14,18 +14,19 @@ layui.use(['form', 'layer'], function () {
             shade:0.8
         });
         //提交数据url
-        var url=ctx+"/user/register";
+        var url=ctx+"/payLog/addEvaluation";
+        //判断，当前页面的隐藏域有数据，说明做修改操作
         //发送ajax添加
        $.post(url,data.field,function(data){
            if(data.code==200){
                 //添加成功了
-               layer.msg("注册成功了");
+               layer.msg("操作成功了");
                //关闭加载层
                layer.close(index);
                //iframe
                layer.closeAll("iframe");
                //重新加载
-               //parent.location.reload();
+               parent.parent.location.reload();
            }else{
                //失败了
                layer.msg(data.msg);

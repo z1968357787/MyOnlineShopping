@@ -45,29 +45,6 @@
         <div class="layui-side-scroll layui-left-menu">
                 <ul class="layui-nav layui-nav-tree layui-left-nav-tree layui-this" id="currency">
                         <li class="layui-nav-item">
-                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-street-view"></i><span class="layui-left-nav"> 购物导航</span> <span class="layui-nav-more"></span></a>
-                            <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-1" data-tab="product_description/index" target="_self"><i class="fa fa-shopping-bag"></i><span class="layui-left-nav"> 选择商品</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2" data-tab="order/index" target="_self"><i class="fa fa-shopping-basket"></i><span class="layui-left-nav"> 查看购物车</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3" data-tab="contact/index" target="_self"><i class="fa fa-address-book-o"></i><span class="layui-left-nav"> 地址管理</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4" data-tab="transferLog/index" target="_self"><i class="fa fa-money "></i><span class="layui-left-nav"> 零钱充值</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-5" data-tab="payLog/index" target="_self"><i class="fa fa-ellipsis-h"></i><span class="layui-left-nav"> 历史订单查看</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-6" data-tab="evaluation/index" target="_self"><i class="fa fa-comment-o"></i><span class="layui-left-nav"> 用户评价查看</span></a>
-                                </dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
                             <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-flag"></i><span class="layui-left-nav"> 商品管理</span> <span class="layui-nav-more"></span></a><dl class="layui-nav-child">
                                 <dd>
                                     <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-7" data-tab="product_description/management" target="_self"><i class="fa fa-exchange"></i><span class="layui-left-nav"> 商品信息管理</span></a>
@@ -80,9 +57,6 @@
                                 </dd>
                                 <dd>
                                     <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10" data-tab="taxCalculator/index" target="_self"><i class="fa fa-star"></i><span class="layui-left-nav"> 税金计算器</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11" data-tab="user/toManagementPage" target="_self"><i class="fa fa-user"></i><span class="layui-left-nav"> 用户管理</span></a>
                                 </dd>
                             </dl>
                         </li>

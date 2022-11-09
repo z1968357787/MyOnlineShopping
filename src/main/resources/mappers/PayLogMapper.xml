@@ -20,11 +20,13 @@
     <result column="discount_description" jdbcType="VARCHAR" property="discountDescription" />
     <result column="tax_total" jdbcType="DECIMAL" property="taxTotal" />
     <result column="tax_description" jdbcType="VARCHAR" property="taxDescription" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
+    <result column="evaluation" jdbcType="VARCHAR" property="evaluation" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, product_id, contact_id, pay_date, product_name, quantity, subtotal, phone, 
     address, contact_man, pay_mode, state, price, refund_reason, discount_total, discount_description, 
-    tax_total, tax_description
+    tax_total, tax_description, score, evaluation
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.xxxx.crm.vo.PayLogKey" resultMap="BaseResultMap">
     select 
@@ -48,15 +50,15 @@
       subtotal, phone, address, 
       contact_man, pay_mode, state, 
       price, refund_reason, discount_total, 
-      discount_description, tax_total, tax_description
-      )
+      discount_description, tax_total, tax_description, 
+      score, evaluation)
     values (#{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{contactId,jdbcType=INTEGER}, 
       #{payDate,jdbcType=TIMESTAMP}, #{productName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{subtotal,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{contactMan,jdbcType=VARCHAR}, #{payMode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{price,jdbcType=DECIMAL}, #{refundReason,jdbcType=VARCHAR}, #{discountTotal,jdbcType=DECIMAL}, 
-      #{discountDescription,jdbcType=VARCHAR}, #{taxTotal,jdbcType=DECIMAL}, #{taxDescription,jdbcType=VARCHAR}
-      )
+      #{discountDescription,jdbcType=VARCHAR}, #{taxTotal,jdbcType=DECIMAL}, #{taxDescription,jdbcType=VARCHAR}, 
+      #{score,jdbcType=DECIMAL}, #{evaluation,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.crm.vo.PayLog">
     insert into t_pay_log
@@ -115,6 +117,12 @@
       <if test="taxDescription != null">
         tax_description,
       </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="evaluation != null">
+        evaluation,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -171,6 +179,12 @@
       <if test="taxDescription != null">
         #{taxDescription,jdbcType=VARCHAR},
       </if>
+      <if test="score != null">
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluation != null">
+        #{evaluation,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.crm.vo.PayLog">
@@ -218,6 +232,12 @@
       <if test="taxDescription != null">
         tax_description = #{taxDescription,jdbcType=VARCHAR},
       </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluation != null">
+        evaluation = #{evaluation,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
       and product_id = #{productId,jdbcType=INTEGER}
@@ -239,7 +259,9 @@
       discount_total = #{discountTotal,jdbcType=DECIMAL},
       discount_description = #{discountDescription,jdbcType=VARCHAR},
       tax_total = #{taxTotal,jdbcType=DECIMAL},
-      tax_description = #{taxDescription,jdbcType=VARCHAR}
+      tax_description = #{taxDescription,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DECIMAL},
+      evaluation = #{evaluation,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
       and product_id = #{productId,jdbcType=INTEGER}
       and contact_id = #{contactId,jdbcType=INTEGER}
@@ -298,4 +320,12 @@
       </if>
     </where>
   </select>
+  <update id="deleteEvaluation" parameterType="com.xxxx.crm.vo.PayLogKey">
+    update t_pay_log set score=null,evaluation=null
+    where user_id = #{userId,jdbcType=INTEGER}
+      and product_id = #{productId,jdbcType=INTEGER}
+      and contact_id = #{contactId,jdbcType=INTEGER}
+      and pay_date = #{payDate,jdbcType=TIMESTAMP}
+  </update>
+
 </mapper>

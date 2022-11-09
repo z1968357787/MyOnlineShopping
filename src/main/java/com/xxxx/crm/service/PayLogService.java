@@ -7,10 +7,12 @@ import com.github.pagehelper.PageInfo;
 import com.xxxx.crm.base.BaseService;
 import com.xxxx.crm.dao.PayLogMapper;
 import com.xxxx.crm.dao.UserMapper;
+import com.xxxx.crm.model.EvaluationModel;
 import com.xxxx.crm.model.PayLogKeyModel;
 import com.xxxx.crm.model.PostSaleModel;
 import com.xxxx.crm.query.PayLogQuery;
 import com.xxxx.crm.utils.AssertUtil;
+import com.xxxx.crm.vo.OrderKey;
 import com.xxxx.crm.vo.PayLog;
 import com.xxxx.crm.vo.PayLogKey;
 import com.xxxx.crm.vo.User;
@@ -36,7 +38,7 @@ public class PayLogService extends BaseService<PayLog, PayLogKey> {
     private UserMapper userMapper;
 
 
-    public Map<String,Object> queryProductByParams(PayLogQuery payLogQuery){
+    public Map<String,Object> queryPayLogByParams(PayLogQuery payLogQuery){
         //return productService.queryProductByParams(productQuery);
         Map<String,Object> map=new HashMap<>();
 
@@ -66,6 +68,15 @@ public class PayLogService extends BaseService<PayLog, PayLogKey> {
         AssertUtil.isTrue(num!=1,"申请退款失败");
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addEvaluation(EvaluationModel evaluationModel) throws ParseException {
+        double score=evaluationModel.getScore();
+        AssertUtil.isTrue(score<0||score>10,"评分不能小于0或不能大于10");
+        PayLog payLog=transform(evaluationModel);
+        int num=payLogMapper.updateByPrimaryKeySelective(payLog);
+        AssertUtil.isTrue(num!=1,"申请退款失败");
+    }
+
     private PayLogKey transform(PayLogKeyModel payLogKeyModel) throws ParseException {
         PayLogKey payLogKey=new PayLogKey();
         payLogKey.setUserId(payLogKeyModel.getUserId());
@@ -73,6 +84,17 @@ public class PayLogService extends BaseService<PayLog, PayLogKey> {
         payLogKey.setContactId(payLogKeyModel.getContactId());
         payLogKey.setPayDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(payLogKeyModel.getPayDate()));
         return payLogKey;
+    }
+
+    private PayLog transform(EvaluationModel evaluationModel) throws ParseException {
+        PayLog payLog=new PayLog();
+        payLog.setUserId(evaluationModel.getUserId());
+        payLog.setProductId(evaluationModel.getProductId());
+        payLog.setContactId(evaluationModel.getContactId());
+        payLog.setPayDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(evaluationModel.getPayDate()));
+        payLog.setScore(evaluationModel.getScore());
+        payLog.setEvaluation(evaluationModel.getEvaluation());
+        return payLog;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -135,5 +157,20 @@ public class PayLogService extends BaseService<PayLog, PayLogKey> {
             payLogList.add(payLog);
         }
         return payLogList;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteEvaluation(String payLogKeyString) throws IOException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaType jt = mapper.getTypeFactory().constructParametricType(ArrayList.class, PayLogKey.class);
+        List<PayLogKey> payLogKeyList =  (List<PayLogKey>)mapper.readValue(payLogKeyString, jt);
+
+        //List<OrderKey> orderKeys=transform(list);
+        PayLogKey payLogKey=payLogKeyList.get(0);
+
+
+        int num=payLogMapper.deleteEvaluation(payLogKey);
+
+        AssertUtil.isTrue(num==0,"删除失败");
     }
 }

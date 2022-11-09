@@ -35,7 +35,7 @@ public class IndexController extends BaseController {
         return "welcome";
     }
     /**
-     * 后端管理主⻚⾯
+     * 后端管理主页面⻚⾯
      * @return
      */
     @RequestMapping("main")
@@ -43,7 +43,13 @@ public class IndexController extends BaseController {
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         User user=userService.selectByPrimaryKey(userId);
         request.getSession().setAttribute("user",user);
-        return "main";
+        if(user.getRole().equals("普通用户")){
+            return "main1";
+        }else if(user.getRole().equals("管理员")){
+            return "main2";
+        }else {
+            return "main3";
+        }
     }
 
 }
