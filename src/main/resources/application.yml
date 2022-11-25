@@ -1,6 +1,6 @@
 ## 端⼝号 上下⽂路径
 server:
-  port: 8080
+  port: 8096
   servlet:
     context-path: /OnlineShopping
 ## 数据源配置

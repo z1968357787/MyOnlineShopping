@@ -4,32 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="third commit">
+    <list default="true" id="2ce991c8-8758-47c7-9060-32ea477a3296" name="变更" comment="fourth commit">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1e422f3f-1400-46e8-8798-271e1578a520.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/DiscountUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/DiscountUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/PayLogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/PayLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/dao/PayLogMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/RegisterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/model/RegisterModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/PayLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/PayLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/ProductDescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxxx/crm/vo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/PayLogMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductDescriptionMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/payLog/paylog_showing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/payLog/paylog_showing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productDescription/product_description.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/js/productManagement/product_description.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/main.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/main.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/payLog/paylog_showing.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/payment/pay_for_order.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/payment/pay_for_order.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +250,19 @@
       <workItem from="1666788204104" duration="1590000" />
       <workItem from="1667895368438" duration="12013000" />
       <workItem from="1667959993577" duration="11120000" />
-      <workItem from="1667980195205" duration="7082000" />
+      <workItem from="1667980195205" duration="8547000" />
+      <workItem from="1668165282036" duration="2817000" />
+      <workItem from="1668481201692" duration="160000" />
+      <workItem from="1668482168829" duration="669000" />
+      <workItem from="1668483015016" duration="129000" />
+      <workItem from="1668827014194" duration="644000" />
+      <workItem from="1668829368737" duration="593000" />
+      <workItem from="1668854427162" duration="2023000" />
+      <workItem from="1669131763579" duration="599000" />
+      <workItem from="1669165057534" duration="6922000" />
+      <workItem from="1669191341565" duration="1896000" />
+      <workItem from="1669205099917" duration="599000" />
+      <workItem from="1669346433219" duration="32000" />
     </task>
     <task id="LOCAL-00001" summary="Second commit">
       <created>1664700332040</created>
@@ -324,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665668724794</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fourth commit">
+      <created>1667989663883</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667989663883</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,6 +341,7 @@
     <MESSAGE value="second commit" />
     <MESSAGE value="Second commit" />
     <MESSAGE value="third commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="third commit" />
+    <MESSAGE value="fourth commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fourth commit" />
   </component>
 </project>
