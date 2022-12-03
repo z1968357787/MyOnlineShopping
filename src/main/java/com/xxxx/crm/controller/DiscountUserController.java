@@ -44,7 +44,7 @@ public class DiscountUserController extends BaseController {
 
     @PostMapping("takeDiscounts")
     @ResponseBody
-    public ResultInfo payCart(HttpServletRequest request, @RequestParam("list")String discountUserString) throws IOException, ParseException {
+    public ResultInfo selectDiscounts(HttpServletRequest request, @RequestParam("list")String discountUserString) throws IOException, ParseException {
         List<DiscountUser> discountUserList=discountUserService.transform(discountUserString);
         request.getSession().setAttribute("discountUserList",discountUserList);
         return success("操作成功");

@@ -29,7 +29,7 @@ public class ContactController extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Map<String,Object> queryProductByParams(HttpServletRequest request, ContactQuery contactQuery){
+    public Map<String,Object> queryContactByParams(HttpServletRequest request, ContactQuery contactQuery){
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         contactQuery.setUserId(userId);
         return contactService.queryContactByParams(contactQuery);

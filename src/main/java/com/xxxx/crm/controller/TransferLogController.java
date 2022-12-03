@@ -3,7 +3,6 @@ package com.xxxx.crm.controller;
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.model.TransferLogModel;
-import com.xxxx.crm.query.OrderQuery;
 import com.xxxx.crm.query.TransferLogQuery;
 import com.xxxx.crm.service.TransferLogService;
 import com.xxxx.crm.utils.LoginUserUtil;
@@ -30,11 +29,11 @@ public class TransferLogController extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Map<String,Object> queryProductByParams(HttpServletRequest request, TransferLogQuery transferLogQuery){
+    public Map<String,Object> queryTransferLogByParams(HttpServletRequest request, TransferLogQuery transferLogQuery){
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         transferLogQuery.setUserId(userId);
         System.out.println(transferLogQuery.getTransferDate());
-        return transferLogService.queryProductByParams(transferLogQuery);
+        return transferLogService.queryTransferLogByParams(transferLogQuery);
     }
 
     @RequestMapping("openTransferPage")

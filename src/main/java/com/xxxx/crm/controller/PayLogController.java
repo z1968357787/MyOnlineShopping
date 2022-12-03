@@ -27,7 +27,7 @@ public class PayLogController extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Map<String,Object> queryProductByParams(HttpServletRequest request, PayLogQuery payLogQuery){
+    public Map<String,Object> queryPatLogByParams(HttpServletRequest request, PayLogQuery payLogQuery){
         Integer userId= LoginUserUtil.releaseUserIdFromCookie(request);
         payLogQuery.setUserId(userId);
         return payLogService.queryPayLogByParams(payLogQuery);
@@ -35,7 +35,7 @@ public class PayLogController extends BaseController {
 
     @RequestMapping("list2")
     @ResponseBody
-    public Map<String,Object> queryProductByParams2(PayLogQuery payLogQuery){
+    public Map<String,Object> queryPayLogByParams2(PayLogQuery payLogQuery){
         return payLogService.queryPayLogByParams(payLogQuery);
     }
 

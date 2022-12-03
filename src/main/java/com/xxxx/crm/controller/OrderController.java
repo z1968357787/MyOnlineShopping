@@ -1,13 +1,9 @@
 package com.xxxx.crm.controller;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
-import com.xxxx.crm.model.OrderKeyModel;
 import com.xxxx.crm.model.OrderModel;
 import com.xxxx.crm.query.OrderQuery;
-import com.xxxx.crm.query.ProductQuery;
 import com.xxxx.crm.service.OrderService;
 import com.xxxx.crm.utils.LoginUserUtil;
 import com.xxxx.crm.vo.Order;
@@ -21,11 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -83,10 +75,10 @@ public class OrderController extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Map<String,Object> queryProductByParams(HttpServletRequest request,OrderQuery orderQuery){
+    public Map<String,Object> queryOrderByParams(HttpServletRequest request, OrderQuery orderQuery){
         Integer userId=LoginUserUtil.releaseUserIdFromCookie(request);
         orderQuery.setUserId(userId);
-        return orderService.queryProductByParams(orderQuery);
+        return orderService.queryOrderByParams(orderQuery);
     }
 
     @PostMapping("update_order")

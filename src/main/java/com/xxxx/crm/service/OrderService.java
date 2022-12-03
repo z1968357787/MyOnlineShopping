@@ -6,7 +6,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xxxx.crm.adapter.ITaxCalculatorAdapter;
 import com.xxxx.crm.base.BaseService;
-import com.xxxx.crm.dao.DiscountUserMapper;
 import com.xxxx.crm.dao.OrderMapper;
 import com.xxxx.crm.dao.ProductDescriptionMapper;
 import com.xxxx.crm.dao.TaxCalculatorMapper;
@@ -175,7 +174,7 @@ public class OrderService extends BaseService<Order,OrderKey> {
         return orderList;
     }*/
 
-    public Map<String,Object> queryProductByParams(OrderQuery orderQuery){
+    public Map<String,Object> queryOrderByParams(OrderQuery orderQuery){
         //return productService.queryProductByParams(productQuery);
         Map<String,Object> map=new HashMap<>();
 

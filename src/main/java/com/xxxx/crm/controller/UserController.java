@@ -4,7 +4,6 @@ import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.model.RegisterModel;
 import com.xxxx.crm.model.UserModel;
-import com.xxxx.crm.query.ContactQuery;
 import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
@@ -87,7 +86,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
-    public Map<String,Object> queryProductByParams(UserQuery userQuery){
+    public Map<String,Object> queryUserByParams(UserQuery userQuery){
         return userService.queryUserByParams(userQuery);
     }
 

@@ -32,7 +32,7 @@ public class TransferLogService extends BaseService<TransferLog, TransferLogKey>
     @Resource
     private AccountMapper accountMapper;
 
-    public Map<String,Object> queryProductByParams(TransferLogQuery transferLogQuery){
+    public Map<String,Object> queryTransferLogByParams(TransferLogQuery transferLogQuery){
         //return productService.queryProductByParams(productQuery);
         Map<String,Object> map=new HashMap<>();
 
